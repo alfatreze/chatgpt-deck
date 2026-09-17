@@ -1579,4 +1579,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** The live smoke now opens a second authenticated connection and validates `hello.ack` after testing an unauthorized connection.
 - **Applicability:** Local companion bridges and reconnecting hardware clients.
 - **Reusable recommendation:** Test reconnect as a complete protocol handshake, including authentication and snapshot delivery.
+
+## 188. Secure endpoint files before atomic publication (2026-09-17)
+
+- **Environment:** macOS companion pairing and `connection.json` publication.
+- **Observation:** Restricting permissions only after replacing the destination briefly exposes a newly written endpoint file under default permissions.
+- **Evidence:** Publication now applies user read/write mode to the temporary file before atomic move; macOS Keychain is the default token store.
+- **Applicability:** Local services publishing bearer-token endpoint metadata.
+- **Reusable recommendation:** Secure temporary files before publication and make the platform secure secret store the default; require an explicit development opt-out for plaintext.
 # Plugin development findings — curated engineering knowledge
