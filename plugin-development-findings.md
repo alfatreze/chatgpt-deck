@@ -1595,4 +1595,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Factory selection is now Keychain by default on macOS, file store only via explicit `CODEX_DECK_TOKEN_STORE=file`, and unsupported Keychain requests fail on other platforms.
 - **Applicability:** Cross-platform local companion secret storage.
 - **Reusable recommendation:** Test default, explicit development override, and unsupported-platform denial as separate cases; never infer the secure-store path from a successful build alone.
+
+## 190. Keep executable hosts separate from testable companion libraries (2026-09-17)
+
+- **Environment:** .NET 10 companion with top-level server entrypoint.
+- **Observation:** Referencing the executable project from a test project can execute the host during test startup, binding sockets and invoking platform services.
+- **Evidence:** A temporary test-project reference started the companion entrypoint instead of isolating token-store types.
+- **Applicability:** Any .NET local service using top-level statements.
+- **Reusable recommendation:** Extract shared service logic into a class library before adding in-process unit tests; until then use process-level integration tests.
 # Plugin development findings — curated engineering knowledge
