@@ -3,7 +3,8 @@
 namespace Loupedeck.CodexDeckPlugin
 {
     using System;
-    using System.Diagnostics;
+    using System.Threading;
+    using CodexDeck.Protocol;
 
     public sealed class TestPermissionsCommand : PluginDynamicCommand
     {
@@ -13,13 +14,8 @@ namespace Loupedeck.CodexDeckPlugin
 
         protected override void RunCommand(string actionParameter)
         {
-            var info = new ProcessStartInfo { FileName = "osascript", UseShellExecute = false, CreateNoWindow = true };
-            info.ArgumentList.Add("-e");
-            info.ArgumentList.Add("tell application \"System Events\" to get name of first process whose frontmost is true");
-            using var process = Process.Start(info);
-            process?.WaitForExit(2000);
-            var ready = process is not null && process.HasExited && process.ExitCode == 0;
-            _status = ready ? "succeeded" : "unavailable";
+            var receipt = new CompanionAdapter().DispatchAsync(new ActionIntent(ProtocolConstants.ActionIntentType, ProtocolConstants.CurrentVersion, Guid.NewGuid(), "test_permissions"), CancellationToken.None).GetAwaiter().GetResult();
+            _status = receipt.Status == ProtocolConstants.Accepted ? "succeeded" : receipt.Status;
             ActionImageChanged();
             _statusTimer?.Dispose();
             _statusTimer = new Timer(_ => { _status = "idle"; ActionImageChanged(); }, null, TimeSpan.FromSeconds(3), Timeout.InfiniteTimeSpan);
