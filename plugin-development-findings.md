@@ -1619,4 +1619,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** `WorkflowTemplateStore` persists only stable ID, label, action, and enabled state; invalid IDs/labels fail validation and defaults recover on malformed files.
 - **Applicability:** Hardware control profiles and other local action registries.
 - **Reusable recommendation:** Separate editable action metadata from potentially sensitive content; require an explicit, reviewed feature before storing prompt or repository text.
+
+## 193. Derive capability snapshots from the adapter (2026-09-17)
+
+- **Environment:** .NET 10 companion hello handshake.
+- **Observation:** A hand-maintained capability list can drift from the adapter and cause the plugin to enable or hide the wrong controls.
+- **Evidence:** Hello snapshots now derive capabilities and idle action states directly from `ICodexAdapter.ProbeAsync`.
+- **Applicability:** Any plugin/companion protocol with capability-gated actions.
+- **Reusable recommendation:** Make the adapter probe the single source for advertised actions; never duplicate capability registries in the transport handler.
 # Plugin development findings — curated engineering knowledge

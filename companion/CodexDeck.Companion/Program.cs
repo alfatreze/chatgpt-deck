@@ -57,15 +57,13 @@ async Task HandleClientAsync(TcpClient client)
             var messageType = envelope.RootElement.GetProperty("type").GetString();
             if (messageType == "hello")
             {
+                var probe = adapter is null
+                    ? new CapabilityProbe(OperatingMode.SetupNeeded, new HashSet<string>())
+                    : await adapter.ProbeAsync(CancellationToken.None);
                 var snapshot = new StateSnapshot(
                     ProtocolConstants.SnapshotType, 1, "shortcut",
-                    new[] { "open_codex", "interrupt", "new_task" }, DateTimeOffset.UtcNow,
-                    new Dictionary<string, ActionState>
-                    {
-                        ["open_codex"] = new(true, "idle"),
-                        ["interrupt"] = new(true, "idle"),
-                        ["new_task"] = new(true, "idle"),
-                    });
+                    probe.Capabilities.ToArray(), DateTimeOffset.UtcNow,
+                    probe.Capabilities.ToDictionary(action => action, _ => new ActionState(true, "idle")));
                 var response = new HelloAck("hello.ack", 1, snapshot);
                 await writer.WriteLineAsync(System.Text.Json.JsonSerializer.Serialize(response, ProtocolJson.Options));
                 continue;
