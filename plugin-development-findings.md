@@ -1667,4 +1667,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** `ReviewTemplateEditorCommand` compiles with a listbox control; post-build development-link creation is sandbox-blocked, so physical appearance is unverified.
 - **Applicability:** Incremental SDK feature adoption.
 - **Reusable recommendation:** Separate compile/API evidence from host registration evidence and require a physical assignment test before marking an editor feature complete.
+
+## 199. Expose unverified controls as capability-gated, not simulated success (2026-09-17)
+
+- **Environment:** Phase 2 plugin controls for Fast Mode and Continue in New Task.
+- **Observation:** Product-requested controls can be discoverable before a verified host shortcut exists, provided they fail closed and show unavailable feedback.
+- **Evidence:** New controls dispatch through `CompanionAdapter`; the current adapter rejects these actions as unsupported.
+- **Applicability:** Any staged integration where UI scope precedes platform capability evidence.
+- **Reusable recommendation:** Prefer honest unavailable controls over local simulations or inferred success; promote only after adapter capability and physical behavior are verified.
 # Plugin development findings — curated engineering knowledge
