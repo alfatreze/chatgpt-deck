@@ -22,6 +22,14 @@ P1-05 will expose a small, stable Core profile rather than a general-purpose com
 
 The implementation should use the SDK `ActionEditorCommand` family only after the installed assembly signatures are reflected and captured in tests. Until then, the current dynamic commands remain the safe fallback.
 
+## Workflow template editor contract
+
+- Stable IDs (`review`, `debug`, `refactor`) are never regenerated from labels.
+- Labels are limited to 40 characters and Save rejects invalid or empty sets.
+- The local store writes a versioned document, preserves a `.bak`, and recovers defaults from malformed files.
+- Only metadata (ID, label, action, enabled) is persisted by default; prompt or repository content is out of scope.
+- A template action renders unavailable until the companion advertises its `launch_*` capability.
+
 ## Pairing configuration note
 
 `CODEX_DECK_PORT` and `CODEX_DECK_TOKEN` are development-only overrides. Loupedeck launches the plugin as a host child process, so shell environment inheritance is not a reliable production configuration channel. P1 pairing must persist an endpoint/token through the companion/plugin config store and expose a diagnostics/reset path.
