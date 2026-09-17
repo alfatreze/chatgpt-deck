@@ -1587,4 +1587,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Publication now applies user read/write mode to the temporary file before atomic move; macOS Keychain is the default token store.
 - **Applicability:** Local services publishing bearer-token endpoint metadata.
 - **Reusable recommendation:** Secure temporary files before publication and make the platform secure secret store the default; require an explicit development opt-out for plaintext.
+
+## 189. Keep secure-store selection explicit in tests (2026-09-17)
+
+- **Environment:** Companion token-store factory on macOS and non-macOS hosts.
+- **Observation:** A secure default must still permit deterministic development tests without silently weakening production behavior.
+- **Evidence:** Factory selection is now Keychain by default on macOS, file store only via explicit `CODEX_DECK_TOKEN_STORE=file`, and unsupported Keychain requests fail on other platforms.
+- **Applicability:** Cross-platform local companion secret storage.
+- **Reusable recommendation:** Test default, explicit development override, and unsupported-platform denial as separate cases; never infer the secure-store path from a successful build alone.
 # Plugin development findings — curated engineering knowledge
