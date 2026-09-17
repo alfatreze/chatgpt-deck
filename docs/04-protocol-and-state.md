@@ -2,7 +2,8 @@
 
 ## 1. Transport
 
-- Localhost WebSocket, JSON UTF-8, protocol name `codex-deck.v1`.
+- Localhost TCP, newline-delimited JSON UTF-8, protocol name `codex-deck.v1`.
+- Each connection may carry multiple request/response envelopes; clients must use bounded read and connect timeouts.
 - Plugin authenticates with an installation-scoped token supplied during pairing.
 - All messages are discriminated by `type`, carry `protocolVersion: 1`, and have a UUID `id` where a reply is expected.
 - Unknown fields are ignored; unknown message types receive an `unsupported` error.

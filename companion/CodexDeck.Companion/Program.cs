@@ -26,7 +26,14 @@ try
 {
 while (true)
 {
-    using var client = await listener.AcceptTcpClientAsync();
+    var client = await listener.AcceptTcpClientAsync();
+    _ = Task.Run(() => HandleClientAsync(client));
+}
+
+async Task HandleClientAsync(TcpClient client)
+{
+    using (client)
+    {
     await using var stream = client.GetStream();
     using var reader = new StreamReader(stream);
     await using var writer = new StreamWriter(stream) { AutoFlush = true };
@@ -83,6 +90,7 @@ while (true)
             await writer.WriteLineAsync("{\"type\":\"error\",\"protocolVersion\":1,\"reason\":\"invalid_message\"}");
         }
     }
+}
 }
 }
 catch (SocketException exception) when (exception.SocketErrorCode is SocketError.OperationAborted or SocketError.Interrupted)

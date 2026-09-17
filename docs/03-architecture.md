@@ -7,7 +7,7 @@
 │ Logitech Actions plugin               │
 │ controls, displays, configuration    │
 └───────────────┬─────────────────────┘
-                │ localhost WebSocket / JSON v1
+                │ localhost TCP / newline JSON v1
 ┌───────────────▼─────────────────────┐
 │ Local companion                      │
 │ bridge server · config · diagnostics │
