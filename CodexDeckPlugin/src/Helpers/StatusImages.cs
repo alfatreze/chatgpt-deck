@@ -6,11 +6,18 @@ internal static class StatusImages
     {
         var normalized = string.IsNullOrWhiteSpace(status) ? "idle" : status.Replace('_', '-');
         PluginLog.Info($"Status image requested: {normalized}");
-        BitmapImage background;
-        try { background = PluginResources.ReadImage($"status-runtime/status-{normalized}.png"); }
-        catch (FileNotFoundException) { background = PluginResources.ReadImage("status-runtime/status-idle.png"); }
         using var builder = new BitmapBuilder(imageSize);
-        builder.SetBackgroundImage(background);
+        builder.Clear(ColorFor(normalized));
         return builder.ToImage();
     }
+
+    private static BitmapColor ColorFor(string status) => status switch
+    {
+        "accepted" or "checking" or "running" => new BitmapColor(0, 122, 255),
+        "succeeded" => new BitmapColor(52, 168, 83),
+        "failed" or "attention" or "companion-disconnected" => new BitmapColor(196, 46, 46),
+        "unavailable" or "permission-needed" or "setup-needed" or "stale" => new BitmapColor(245, 158, 11),
+        "not-supported" or "cancelled" => new BitmapColor(97, 97, 97),
+        _ => new BitmapColor(54, 54, 54),
+    };
 }

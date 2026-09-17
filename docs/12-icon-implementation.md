@@ -21,7 +21,7 @@ For stateful controls such as Interrupt, prefer a small finite set of embedded b
 
 Status PNGs are embedded from `assets/status/` and selected by normalized action status. Action-specific icons remain deferred; status images provide color-coded feedback while labels retain the semantic text.
 
-The master status assets remain 256×256 RGBA PNGs. Runtime derivatives live in `assets/status-runtime/` as 80×80 RGBA PNGs, matching the Actions SDK runtime-image guidance. They are rendered through `BitmapBuilder(imageSize).SetBackgroundImage(...)`, so the host receives a bitmap at the requested device size. Runtime button frames should use PNG; changing PNG compression is not a separate compatibility mode because PNG compression is lossless.
+The master status assets remain 256×256 RGBA PNGs. The Actions SDK documents 80×80 PNG button images, but the current host-native renderer uses `BitmapBuilder.Clear(BitmapColor)` for status backgrounds. That removes file decoding/scaling from the live rendering path while retaining the source PNGs as visual specifications. Runtime button frames should use PNG when a raster asset is required; changing PNG compression is not a separate compatibility mode because PNG compression is lossless.
 
 ### Profile override constraint
 

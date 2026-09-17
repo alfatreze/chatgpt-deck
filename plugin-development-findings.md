@@ -1707,4 +1707,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Official SDK guidance specifies 80×80 embedded PNGs for runtime button images and demonstrates composing them through `BitmapBuilder(imageSize).SetBackgroundImage(...)`.
 - **Applicability:** Dynamic bitmap feedback on Loupedeck/Logi Actions devices.
 - **Reusable recommendation:** Retain high-resolution RGBA masters, generate 80×80 RGBA runtime derivatives, and return a `BitmapBuilder` image at the requested size. Do not treat PNG compression level as a compatibility choice; use PNG rather than JPEG/SVG for this runtime path.
+
+## 204. Prefer native bitmap fills to isolate runtime rendering faults (2026-09-17)
+
+- **Environment:** macOS Logi Actions C# SDK, dynamic command image callback.
+- **Observation:** The host invoked `GetCommandImage` but did not visibly render externally sourced status frames, with no decode errors in logs.
+- **Evidence:** The renderer was changed to `BitmapBuilder.Clear(BitmapColor)` so that the returned bitmap is fully host-native and independent of PNG decode, scaling, alpha, or compression.
+- **Applicability:** Diagnosing runtime image handoff on hardware plugins.
+- **Reusable recommendation:** Use a solid native bitmap fill as the first rendering control test. If it works, reintroduce composited images stepwise; if it does not, investigate host assignment/rendering rather than file formats.
 # Plugin development findings — curated engineering knowledge
