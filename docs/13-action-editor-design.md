@@ -33,6 +33,7 @@ Inherited inspection also confirms `ActionEditorCommand.HasActionEditor`, `Actio
 - The local store writes a versioned document, preserves a `.bak`, and recovers defaults from malformed files.
 - Only metadata (ID, label, action, enabled) is persisted by default; prompt or repository content is out of scope.
 - A template action renders unavailable until the companion advertises its `launch_*` capability.
+- The generic Workflow Template action offers Review, Debug, and Refactor in one selector; fixed individual actions remain convenience shortcuts with no editor choice.
 
 ## Pairing configuration note
 

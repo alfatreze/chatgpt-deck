@@ -7,10 +7,10 @@ public sealed class ReviewTemplateEditorCommand : ActionEditorCommand
 {
     public ReviewTemplateEditorCommand() : base(DeviceType.All)
     {
-        Name = "ReviewTemplate";
-        DisplayName = "Review Workflow";
+        Name = "WorkflowTemplate";
+        DisplayName = "Workflow Template";
         GroupName = "Commands###Workflows";
-        Description = "Choose the configured review workflow.";
+        Description = "Choose a configured workflow template.";
         ActionEditor.AddControlEx(new ActionEditorListbox("Template", "Template", "Workflow template"));
         ActionEditor.ListboxItemsRequested += OnListboxItemsRequested;
     }
@@ -24,6 +24,8 @@ public sealed class ReviewTemplateEditorCommand : ActionEditorCommand
     {
         if (!e.ControlName.Equals("Template", StringComparison.OrdinalIgnoreCase)) return;
         e.AddItem("review", "Review", "Configured review workflow");
+        e.AddItem("debug", "Debug", "Configured debug workflow");
+        e.AddItem("refactor", "Refactor", "Configured refactor workflow");
         e.SetSelectedItemName("review");
     }
 }
@@ -51,7 +53,10 @@ public abstract class ReviewTemplateEditorCommandBase : ActionEditorCommand
     private void OnItems(object sender, ActionEditorListboxItemsRequestedEventArgs e)
     {
         if (!e.ControlName.Equals("Template", StringComparison.OrdinalIgnoreCase)) return;
-        e.AddItem(_default, _default, "Configured workflow template"); e.SetSelectedItemName(_default);
+        e.AddItem("review", "Review", "Configured workflow template");
+        e.AddItem("debug", "Debug", "Configured workflow template");
+        e.AddItem("refactor", "Refactor", "Configured workflow template");
+        e.SetSelectedItemName(_default);
     }
     protected override bool RunCommand(ActionEditorActionParameters p) => p.TryGetString("Template", out var value) && !string.IsNullOrWhiteSpace(value);
 }
