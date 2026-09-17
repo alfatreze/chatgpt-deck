@@ -20,3 +20,7 @@ For stateful controls such as Interrupt, prefer a small finite set of embedded b
 # Status image set
 
 Status PNGs are embedded from `assets/status/` and selected by normalized action status. Action-specific icons remain deferred; status images provide color-coded feedback while labels retain the semantic text.
+
+### Profile override constraint
+
+The Icon Editor can create an action-specific `.ict` file in the active Logi profile. That static icon template can override a dynamic command's `GetCommandImage()` output. Dynamic-status actions must not be manually styled through the Icon Editor; if an existing user template blocks the runtime frame, preserve it in a backup and remove the active override before reloading the plugin.

@@ -1691,4 +1691,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Fast Mode and Continue in New Task showed Ready despite returning unsupported receipts.
 - **Applicability:** Capability-gated hardware controls.
 - **Reusable recommendation:** Initialize controls to unavailable until a capability probe succeeds; reserve Ready for an actionable, verified path.
+
+## 202. Profile Icon Editor templates override dynamic command images (2026-09-17)
+
+- **Environment:** macOS Logi Plugin Service profile for a Loupedeck dynamic action.
+- **Observation:** The host invoked `GetCommandImage` and the plugin returned status frames, but a per-action `.ict` file in the active profile supplied a static background and text instead.
+- **Evidence:** `CodexDeck.log` recorded `Status image requested: unavailable`; the active `ActionIcons/$CodexDeck___...ContinueNewTaskCommand.ict` defined `backgroundColor`, `text`, and `textColor`.
+- **Applicability:** Any dynamic Loupedeck/Logi Actions command with user-customized Icon Editor styling.
+- **Reusable recommendation:** When a dynamic frame appears frozen, inspect the active profile's `ActionIcons` overrides before changing PNGs or callback code. Preserve user styling by moving the exact conflicting `.ict` to a recoverable backup, then reload the plugin.
 # Plugin development findings — curated engineering knowledge
