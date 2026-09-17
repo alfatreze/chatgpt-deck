@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-import json, os, socket, subprocess, time
+import json, os, socket, subprocess, time, stat
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 port = 62680
-env = dict(os.environ, CODEX_DECK_TOKEN="integration-test-token", CODEX_DECK_PORT=str(port))
+env = dict(os.environ, CODEX_DECK_TOKEN="integration-test-token", CODEX_DECK_TOKEN_STORE="file", CODEX_DECK_PORT=str(port))
 binary = os.path.join(root, "companion/CodexDeck.Companion/bin/Debug/net10.0/CodexDeck.Companion.dll")
 proc = subprocess.Popen(["dotnet", binary], cwd=root, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 try:
@@ -12,6 +12,10 @@ try:
             with socket.create_connection(("127.0.0.1", port), timeout=0.2): break
         except OSError: time.sleep(0.2)
     else: raise RuntimeError("companion did not start")
+    endpoint = os.path.expanduser("~/Library/Application Support/CodexDeck/connection.json")
+    if os.path.exists(endpoint):
+        mode = stat.S_IMODE(os.stat(endpoint).st_mode)
+        assert mode & 0o077 == 0, f"endpoint permissions too broad: {oct(mode)}"
     def exchange(payload):
         with socket.create_connection(("127.0.0.1", port), timeout=3) as s:
             s.sendall((json.dumps(payload) + "\n").encode())

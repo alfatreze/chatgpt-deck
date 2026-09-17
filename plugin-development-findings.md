@@ -1603,4 +1603,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** A temporary test-project reference started the companion entrypoint instead of isolating token-store types.
 - **Applicability:** Any .NET local service using top-level statements.
 - **Reusable recommendation:** Extract shared service logic into a class library before adding in-process unit tests; until then use process-level integration tests.
+
+## 191. Pairing permissions need process-level verification (2026-09-17)
+
+- **Environment:** macOS companion integration smoke with explicit file-store mode.
+- **Observation:** Endpoint-file permissions are observable only after the host publishes the live connection metadata.
+- **Evidence:** The integration smoke now checks `connection.json` owner-only mode while exercising the real server.
+- **Applicability:** Local services publishing credentials or connection metadata.
+- **Reusable recommendation:** Verify secret-file permissions in a live process test, not only by inspecting the write helper.
 # Plugin development findings — curated engineering knowledge
