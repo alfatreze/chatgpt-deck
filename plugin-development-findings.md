@@ -1563,4 +1563,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Companion now applies a 15-second cancellation deadline to each line read and closes the idle client cleanly.
 - **Applicability:** Local socket bridges and plugin companion services.
 - **Reusable recommendation:** Bound both connect and read operations; treat timeout as a recoverable disconnect rather than allowing an idle client to consume a handler forever.
+
+## 186. Live socket tests may require host permission (2026-09-17)
+
+- **Environment:** macOS sandboxed development shell running the .NET loopback companion.
+- **Observation:** The companion could build successfully but binding a loopback listener was denied inside the restricted test sandbox.
+- **Evidence:** Direct run returned `SocketException (13): Permission denied`; the same integration test passed when executed with explicit local socket permission.
+- **Applicability:** Any plugin companion integration test that binds localhost during automated development.
+- **Reusable recommendation:** Distinguish sandbox/network-policy failures from product failures and document the required elevated test invocation.
 # Plugin development findings — curated engineering knowledge
