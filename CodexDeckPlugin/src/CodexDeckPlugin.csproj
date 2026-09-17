@@ -31,6 +31,7 @@
     <ProjectReference Include="../../shared/CodexDeck.Protocol/CodexDeck.Protocol.csproj" />
     <EmbeddedResource Include="../../assets/openai.png" Link="Resources/openai.png" />
     <EmbeddedResource Include="../../assets/interrupt-attention.png" Link="Resources/interrupt-attention.png" />
+    <EmbeddedResource Include="../../assets/status/*.png" Link="Resources/status/%(Filename)%(Extension)" />
   </ItemGroup>
 
   <Target Name="CopyPackage" AfterTargets="PostBuildEvent">

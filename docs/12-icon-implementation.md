@@ -17,3 +17,6 @@ Implementation rules:
 ## Dynamic state imagery
 
 For stateful controls such as Interrupt, prefer a small finite set of embedded bitmap frames (normal, attention/red, unavailable) returned by `GetCommandImage()` and refreshed with `ActionImageChanged()`. The installed Plugin API binary contains `CreateImage` and `ReplaceImageColor` symbols, but these are not treated as public API until their callable signatures are confirmed by reflection or official SDK documentation. Verify each frame on physical hardware and retain text/icon cues for accessibility.
+# Status image set
+
+Status PNGs are embedded from `assets/status/` and selected by normalized action status. Action-specific icons remain deferred; status images provide color-coded feedback while labels retain the semantic text.
