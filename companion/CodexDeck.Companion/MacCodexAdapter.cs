@@ -8,7 +8,7 @@ public sealed class MacCodexAdapter : ICodexAdapter
 {
     private static readonly HashSet<string> Supported = new(StringComparer.Ordinal)
     {
-        "open_codex", "focus_codex", "new_task", "interrupt"
+        "open_codex", "focus_codex", "new_task", "interrupt", "interrupt_double"
     };
 
     public Task<CapabilityProbe> ProbeAsync(CancellationToken cancellationToken)
@@ -28,6 +28,7 @@ public sealed class MacCodexAdapter : ICodexAdapter
             "open_codex" or "focus_codex" => ("open", new[] { "-a", "Codex" }),
             "new_task" => ("osascript", new[] { "-e", "tell application \"Codex\" to activate", "-e", "delay 0.25", "-e", "tell application \"System Events\" to keystroke \"n\" using command down" }),
             "interrupt" => ("osascript", new[] { "-e", "tell application \"System Events\" to key code 53" }),
+            "interrupt_double" => ("osascript", new[] { "-e", "tell application \"System Events\" to key code 53", "-e", "delay 0.35", "-e", "tell application \"System Events\" to key code 53" }),
             _ => throw new InvalidOperationException()
         };
 
