@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codexdeck.local/schema/protocol-v1.json",
+  "title": "Codex Deck protocol v1",
+  "type": "object",
+  "required": ["type", "protocolVersion"],
+  "properties": {
+    "type": { "type": "string" },
+    "protocolVersion": { "const": 1 },
+    "id": { "type": "string", "format": "uuid" },
+    "status": { "enum": ["accepted", "unavailable", "failed"] },
+    "reason": { "enum": ["not_configured", "not_supported", "not_connected", "not_focused", "permission_denied", "execution_failed"] }
+  },
+  "additionalProperties": true
+}

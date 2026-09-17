@@ -1,0 +1,8 @@
+{
+  "type": "usage.snapshot",
+  "protocolVersion": 1,
+  "plan": "business",
+  "updatedAt": "2026-09-17T08:00:00Z",
+  "windows": [],
+  "credits": { "supported": false, "updatedAt": "2026-09-17T08:00:00Z" }
+}

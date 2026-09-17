@@ -1,0 +1,11 @@
+{
+  "type": "usage.snapshot",
+  "protocolVersion": 1,
+  "plan": "plus",
+  "updatedAt": "2026-09-17T08:00:00Z",
+  "windows": [
+    { "id": "five_hour", "usedPercent": 42, "resetsAt": "2026-09-17T10:00:00Z", "supported": true, "updatedAt": "2026-09-17T08:00:00Z" },
+    { "id": "weekly", "usedPercent": 68, "resetsAt": "2026-09-20T08:00:00Z", "supported": true, "updatedAt": "2026-09-17T08:00:00Z" }
+  ],
+  "credits": { "balance": 12.5, "unit": "USD", "lastCost": 0.08, "lastCostAt": "2026-09-17T07:59:00Z", "supported": true, "updatedAt": "2026-09-17T08:00:00Z" }
+}

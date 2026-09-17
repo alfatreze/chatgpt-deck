@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+
+# .NET / C# build output
+[Bb]in/
+[Oo]bj/
+artifacts/
+TestResults/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Local SDKs, host links, package output, and diagnostic captures
+.plugin-dev/
+.sdk-cache/
+.tool-cache/
+packages/
+release/
+dist/
+*.lplug4
+*.link
+*.zip
+*.log
+
+# Node feasibility probes
+node_modules/
+npm-debug.log*
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+appsettings.Local.json
+secrets.json
+
+# Editor state
+.idea/
+.vs/
+.vscode/

@@ -1,0 +1,29 @@
+# Core profile and action-editor design
+
+## Scope
+
+**Status:** Design captured; implementation blocked on host discovery/registration verification. A compile-only prototype was removed from the shipping project after the host exposed only the existing dynamic actions.
+
+P1-05 will expose a small, stable Core profile rather than a general-purpose command builder. Each assignment stores a stable action ID plus validated parameters; the companion remains the source of truth for capability and enabled state.
+
+## Initial controls
+
+- **Command:** Open Codex, Interrupt Codex, Accept, Reject, New Task.
+- **Profile:** Core (default), Review, Debug, Refactor (templates arrive in Phase 2).
+- **Feedback:** text feedback on by default; reduced motion and high contrast are shared preferences.
+
+## Save and refresh rules
+
+1. Validate action ID and parameters before save.
+2. Reject unknown IDs, malformed values, and unsupported capabilities without mutating the existing assignment.
+3. Persist only the validated document through `ShortcutBindingStore`.
+4. Refresh labels/options after profile or capability snapshots change.
+5. Unknown or stale bridge state renders unavailable; it never silently falls back to a guessed status.
+
+The implementation should use the SDK `ActionEditorCommand` family only after the installed assembly signatures are reflected and captured in tests. Until then, the current dynamic commands remain the safe fallback.
+
+## Pairing configuration note
+
+`CODEX_DECK_PORT` and `CODEX_DECK_TOKEN` are development-only overrides. Loupedeck launches the plugin as a host child process, so shell environment inheritance is not a reliable production configuration channel. P1 pairing must persist an endpoint/token through the companion/plugin config store and expose a diagnostics/reset path.
+
+Reference: [Logi Actions Action Editor Actions](https://logitech.github.io/actions-sdk-docs/csharp/plugin-features/action-editor-actions/).
