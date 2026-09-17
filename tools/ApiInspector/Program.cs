@@ -33,6 +33,8 @@ foreach (var type in exported.Where(t => t.Name.Contains("BitmapImage", StringCo
     || t.Name.Contains("ActionEditor", StringComparison.OrdinalIgnoreCase)))
 {
     Console.WriteLine($"TYPE {type.FullName}");
+    foreach (var constructor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)) Console.WriteLine($"  CTOR {constructor}");
+    foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly).OrderBy(p => p.Name)) Console.WriteLine($"  PROP {property.PropertyType} {property.Name}");
     foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly).OrderBy(m => m.Name))
         Console.WriteLine($"  {method}");
 }
