@@ -19,7 +19,7 @@ namespace Loupedeck.CodexDeckPlugin
             ActionImageChanged();
             _statusTimer?.Dispose();
             _statusTimer = new Timer(_ => { _status = "idle"; ActionImageChanged(); }, null, TimeSpan.FromSeconds(3), Timeout.InfiniteTimeSpan);
-            PluginLog.Info($"Permissions test: {(ready ? "ready" : "permission_needed")}");
+            PluginLog.Info($"Permissions test: {receipt.Status}");
         }
 
         protected override string GetCommandDisplayName(string actionParameter, PluginImageSize imageSize)

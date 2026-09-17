@@ -7,7 +7,7 @@ namespace Loupedeck.CodexDeckPlugin
 
     public class OpenCodexCommand : PluginDynamicCommand
     {
-        private readonly ShortcutAdapter _adapter;
+        private readonly ICodexAdapter _adapter;
         private string _status = "idle";
         private Timer _statusTimer;
 
