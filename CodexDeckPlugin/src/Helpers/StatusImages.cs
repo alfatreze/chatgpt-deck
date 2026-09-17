@@ -5,7 +5,6 @@ internal static class StatusImages
     public static BitmapImage For(string status, PluginImageSize imageSize)
     {
         var normalized = string.IsNullOrWhiteSpace(status) ? "idle" : status.Replace('_', '-');
-        PluginLog.Info($"Status image requested: {normalized}");
         using var builder = new BitmapBuilder(imageSize);
         builder.Clear(ColorFor(normalized));
         return builder.ToImage();

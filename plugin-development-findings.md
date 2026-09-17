@@ -1715,4 +1715,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** The renderer was changed to `BitmapBuilder.Clear(BitmapColor)` so that the returned bitmap is fully host-native and independent of PNG decode, scaling, alpha, or compression.
 - **Applicability:** Diagnosing runtime image handoff on hardware plugins.
 - **Reusable recommendation:** Use a solid native bitmap fill as the first rendering control test. If it works, reintroduce composited images stepwise; if it does not, investigate host assignment/rendering rather than file formats.
+
+## 205. Native runtime status-color rendering physically verified (2026-09-17)
+
+- **Environment:** macOS Loupedeck surface with Codex Deck dynamic actions.
+- **Observation:** Host-native bitmap fills rendered correctly for unavailable workflow controls after externally sourced frames did not visibly render.
+- **Evidence:** User supplied physical-device confirmation showing amber backgrounds for Fast Mode and Continue in New Task while their status labels remain visible.
+- **Applicability:** Loupedeck/Logi Actions dynamic status feedback.
+- **Reusable recommendation:** Use `BitmapBuilder.Clear(BitmapColor)` as the reliable baseline for full-button status backgrounds; add text through the host label or a later BitmapBuilder overlay, not a profile Icon Editor template.
 # Plugin development findings — curated engineering knowledge
