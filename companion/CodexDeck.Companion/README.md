@@ -6,7 +6,7 @@ Build and run:
 dotnet run --project companion/CodexDeck.Companion/CodexDeck.Companion.csproj
 ```
 
-The process binds to `127.0.0.1` on an ephemeral port and prints the selected port. Set `CODEX_DECK_PORT` to choose a development port and set the same value for the plugin diagnostic action. Set `CODEX_DECK_TOKEN` to require a matching `token` property in each JSON envelope; the plugin reads the same environment variable. The current skeleton handles one newline-delimited envelope per connection:
+The process binds to `127.0.0.1` on an ephemeral port and prints the selected port. Set `CODEX_DECK_PORT` to choose a development port and set the same value for the plugin diagnostic action. Set `CODEX_DECK_TOKEN` to require a matching `token` property in each JSON envelope; the plugin reads the same environment variable. On macOS, pairing tokens use Keychain by default; set `CODEX_DECK_TOKEN_STORE=file` only for explicit development-only plaintext storage. The current skeleton handles newline-delimited envelopes per connection:
 
 - `hello` → `hello.ack` with shortcut mode
 - `action.intent` → `action.receipt` with `accepted`

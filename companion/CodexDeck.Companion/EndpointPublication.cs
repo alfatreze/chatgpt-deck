@@ -13,9 +13,9 @@ public static class EndpointPublication
         var path = FilePath;
         var temporary = path + ".tmp";
         File.WriteAllText(temporary, JsonSerializer.Serialize(new { port, token }));
-        File.Move(temporary, path, true);
         if (OperatingSystem.IsMacOS() || OperatingSystem.IsLinux())
-            File.SetUnixFileMode(path, UnixFileMode.UserRead | UnixFileMode.UserWrite);
+            File.SetUnixFileMode(temporary, UnixFileMode.UserRead | UnixFileMode.UserWrite);
+        File.Move(temporary, path, true);
     }
 
     public static void Clear() { try { if (File.Exists(FilePath)) File.Delete(FilePath); } catch { } }
