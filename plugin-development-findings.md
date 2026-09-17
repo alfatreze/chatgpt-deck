@@ -1611,4 +1611,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** The integration smoke now checks `connection.json` owner-only mode while exercising the real server.
 - **Applicability:** Local services publishing credentials or connection metadata.
 - **Reusable recommendation:** Verify secret-file permissions in a live process test, not only by inspecting the write helper.
+
+## 192. Keep workflow template persistence metadata-only by default (2026-09-17)
+
+- **Environment:** Shared .NET 10 protocol library and local profile store.
+- **Observation:** Workflow controls can be scaffolded safely without persisting prompt text or reconstructing task context.
+- **Evidence:** `WorkflowTemplateStore` persists only stable ID, label, action, and enabled state; invalid IDs/labels fail validation and defaults recover on malformed files.
+- **Applicability:** Hardware control profiles and other local action registries.
+- **Reusable recommendation:** Separate editable action metadata from potentially sensitive content; require an explicit, reviewed feature before storing prompt or repository text.
 # Plugin development findings — curated engineering knowledge

@@ -35,6 +35,11 @@ Assert(File.Exists(configPath + ".bak"), "save should preserve a backup");
 var exportPath = configPath + ".export.json";
 store.Export(configPath, exportPath);
 Assert(store.Load(exportPath)[0].KeyStroke == "Command+O", "export should round-trip");
+var templateStore = new WorkflowTemplateStore();
+var templatePath = configPath + ".templates.json";
+templateStore.Save(templatePath, WorkflowTemplateDefaults.All);
+Assert(templateStore.Load(templatePath).Count == 3, "workflow templates should round-trip");
+Assert(!WorkflowTemplateValidator.IsValid(new WorkflowTemplate("bad id", "Bad", "launch_review")), "template IDs should be stable identifiers");
 File.WriteAllText(configPath, "[{\"action\":\"open_codex\",\"keyStroke\":\"Command+L\",\"enabled\":true}]");
 Assert(store.Load(configPath)[0].KeyStroke == "Command+L", "legacy list format should load");
 store.Save(configPath, new[] { new ShortcutBinding("open_codex", "Command+O") });
@@ -45,6 +50,8 @@ Assert(store.Load(configPath).Count > 0, "unsupported schema should recover to d
 File.Delete(configPath);
 File.Delete(configPath + ".bak");
 File.Delete(exportPath);
+File.Delete(templatePath);
+File.Delete(templatePath + ".bak");
 
 var reducer = new StateSnapshotReducer();
 var currentSnapshot = new StateSnapshot("state.snapshot", 1, "shortcut", Array.Empty<string>(), DateTimeOffset.UtcNow, new Dictionary<string, ActionState>());
