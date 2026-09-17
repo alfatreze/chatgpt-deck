@@ -26,11 +26,6 @@ namespace Loupedeck.CodexDeckPlugin
         public override void Load()
         {
             ActionEditorCommands.AddAction(new ReviewTemplateEditorCommand());
-            ActionEditorCommands.AddAction(new DebugTemplateEditorCommand());
-            ActionEditorCommands.AddAction(new RefactorTemplateEditorCommand());
-            DynamicCommands.AddAction(new ReviewWorkflowCommand());
-            DynamicCommands.AddAction(new DebugWorkflowCommand());
-            DynamicCommands.AddAction(new RefactorWorkflowCommand());
             DynamicCommands.AddAction(new FastModeCommand());
             DynamicCommands.AddAction(new ContinueNewTaskCommand());
         }
