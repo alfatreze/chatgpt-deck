@@ -28,6 +28,11 @@ namespace Loupedeck.CodexDeckPlugin
             ActionEditorCommands.AddAction(new ReviewTemplateEditorCommand());
             ActionEditorCommands.AddAction(new DebugTemplateEditorCommand());
             ActionEditorCommands.AddAction(new RefactorTemplateEditorCommand());
+            DynamicCommands.AddAction(new ReviewWorkflowCommand());
+            DynamicCommands.AddAction(new DebugWorkflowCommand());
+            DynamicCommands.AddAction(new RefactorWorkflowCommand());
+            DynamicCommands.AddAction(new FastModeCommand());
+            DynamicCommands.AddAction(new ContinueNewTaskCommand());
         }
 
         // This method is called when the plugin is unloaded.
