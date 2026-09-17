@@ -24,9 +24,11 @@ try:
     assert unknown["status"] == "unavailable" and unknown["reason"] == "not_supported"
     malformed = exchange({"type":"action.intent","protocolVersion":1,"action":"interrupt","token":"integration-test-token"})
     assert malformed["type"] == "error"
+    bad_id = exchange({"type":"action.intent","protocolVersion":1,"id":"not-a-guid","action":"interrupt","token":"integration-test-token"})
+    assert bad_id["type"] == "error" and bad_id["reason"] == "invalid_message"
     reconnect = exchange({"type":"hello","protocolVersion":1,"token":"integration-test-token"})
     assert reconnect["type"] == "hello.ack"
-    print("Companion integration smoke passed: hello, auth, unauthorized, unsupported, malformed, reconnect")
+    print("Companion integration smoke passed: hello, auth, unauthorized, unsupported, malformed-id, reconnect")
 finally:
     proc.terminate()
     try: proc.wait(timeout=3)
