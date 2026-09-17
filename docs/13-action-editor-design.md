@@ -24,6 +24,8 @@ The implementation should use the SDK `ActionEditorCommand` family only after th
 
 Verified host signatures (macOS ARM64): `ActionEditorCommand(DeviceType)`, `ActionEditorAction(Boolean, Boolean, DeviceType)`, `ActionEditorTextbox(name, label, description)`, `ActionEditorListbox(name, label, description)`, and `ActionEditor.AddControl<T>(control)`. These are API evidence only; registration and persistence still require a physical host test.
 
+Inherited inspection also confirms `ActionEditorCommand.HasActionEditor`, `ActionEditor` and `SetDescription`/`SetSupportedDevices` members. A prototype must still establish the SDK’s registration lifecycle and host callback behavior before shipping.
+
 ## Workflow template editor contract
 
 - Stable IDs (`review`, `debug`, `refactor`) are never regenerated from labels.
