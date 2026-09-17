@@ -1723,4 +1723,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** User supplied physical-device confirmation showing amber backgrounds for Fast Mode and Continue in New Task while their status labels remain visible.
 - **Applicability:** Loupedeck/Logi Actions dynamic status feedback.
 - **Reusable recommendation:** Use `BitmapBuilder.Clear(BitmapColor)` as the reliable baseline for full-button status backgrounds; add text through the host label or a later BitmapBuilder overlay, not a profile Icon Editor template.
+
+## 206. Status-frame treatments can be composed with native primitives (2026-09-17)
+
+- **Environment:** Logi Actions `BitmapBuilder` runtime image path.
+- **Observation:** The SDK exposes rectangles and circles but no dedicated rounded-rectangle method.
+- **Evidence:** The status comparison uses a full-bleed fill, an inset status rail, and a rounded frame built from rectangles and four circles.
+- **Applicability:** Dynamic hardware-button feedback without external image dependencies.
+- **Reusable recommendation:** Start with native primitives for status shells. Maintain textual labels outside the color treatment and validate small-device legibility on physical hardware.
 # Plugin development findings — curated engineering knowledge

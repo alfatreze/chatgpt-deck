@@ -49,5 +49,8 @@ namespace Loupedeck.CodexDeckPlugin
                 _ => "Companion Status\nCompanion unavailable"
             };
         }
+
+        protected override BitmapImage GetCommandImage(string actionParameter, PluginImageSize imageSize) =>
+            StatusImages.For(_status switch { "sending" => "checking", "succeeded" => "succeeded", _ => "unavailable" }, imageSize, StatusFrameStyle.RoundedFrame);
     }
 }

@@ -26,3 +26,7 @@ The master status assets remain 256×256 RGBA PNGs. The Actions SDK documents 80
 ### Profile override constraint
 
 The Icon Editor can create an action-specific `.ict` file in the active Logi profile. That static icon template can override a dynamic command's `GetCommandImage()` output. Dynamic-status actions must not be manually styled through the Icon Editor; if an existing user template blocks the runtime frame, preserve it in a backup and remove the active override before reloading the plugin.
+
+### Runtime status-frame comparison
+
+The current physical comparison assigns a distinct host-native treatment to three controls: Fast Mode uses a full-bleed status color, Continue in New Task uses a narrow status rail on a dark background, and Companion Status uses a rounded status frame around a dark center. All keep the host-rendered textual label and status so color is supplementary.
