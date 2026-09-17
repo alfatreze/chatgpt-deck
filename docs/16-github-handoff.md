@@ -21,3 +21,12 @@ Run `scripts/github_preflight.sh` before staging the initial commit.
 4. Verify a clean clone can follow the documented build/test steps.
 
 Do not publish while pairing secrets, local endpoint files, host logs, or unreviewed experimental artifacts are present.
+
+## Publication record
+
+- Repository: [alfatreze/chatgpt-deck](https://github.com/alfatreze/chatgpt-deck)
+- Visibility: Private
+- License: MIT
+- Initial commit: `c08b5a3`
+- Publication date: 2026-09-17
+- Clean-clone verification: passed `scripts/github_preflight.sh` and `scripts/regression_gate.sh` after dependency restore.
