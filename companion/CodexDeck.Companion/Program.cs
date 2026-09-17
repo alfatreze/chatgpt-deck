@@ -37,8 +37,13 @@ async Task HandleClientAsync(TcpClient client)
     await using var stream = client.GetStream();
     using var reader = new StreamReader(stream);
     await using var writer = new StreamWriter(stream) { AutoFlush = true };
-    while (await reader.ReadLineAsync() is { } line)
+    while (true)
     {
+        using var readTimeout = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+        string? line;
+        try { line = await reader.ReadLineAsync(readTimeout.Token); }
+        catch (OperationCanceledException) { break; }
+        if (line is null) break;
         try
         {
             var envelope = System.Text.Json.JsonDocument.Parse(line);
