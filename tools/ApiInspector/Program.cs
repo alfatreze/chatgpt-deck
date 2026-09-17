@@ -30,7 +30,8 @@ catch (FileNotFoundException error)
 }
 foreach (var type in exported.Where(t => t.Name.Contains("BitmapImage", StringComparison.OrdinalIgnoreCase)
     || t.Name.Contains("Image", StringComparison.OrdinalIgnoreCase)
-    || t.Name.Contains("ActionEditor", StringComparison.OrdinalIgnoreCase)))
+    || t.Name.Contains("ActionEditor", StringComparison.OrdinalIgnoreCase)
+    || t.Name == "Plugin"))
 {
     Console.WriteLine($"TYPE {type.FullName}");
     foreach (var constructor in type.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)) Console.WriteLine($"  CTOR {constructor}");

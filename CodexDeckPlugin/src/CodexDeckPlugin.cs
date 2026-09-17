@@ -25,6 +25,9 @@ namespace Loupedeck.CodexDeckPlugin
         // This method is called when the plugin is loaded.
         public override void Load()
         {
+            ActionEditorCommands.AddAction(new ReviewTemplateEditorCommand());
+            ActionEditorCommands.AddAction(new DebugTemplateEditorCommand());
+            ActionEditorCommands.AddAction(new RefactorTemplateEditorCommand());
         }
 
         // This method is called when the plugin is unloaded.
