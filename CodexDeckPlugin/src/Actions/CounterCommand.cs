@@ -45,7 +45,7 @@ namespace Loupedeck.CodexDeckPlugin
         protected override String GetCommandDisplayName(String actionParameter, PluginImageSize imageSize) =>
             ActionViewStateMapper.Map("Open Codex", _status).Label + Environment.NewLine + ActionViewStateMapper.Map("Open Codex", _status).Feedback;
 
-        protected override BitmapImage GetCommandImage(String actionParameter, PluginImageSize imageSize) => StatusImages.For(_status);
+        protected override BitmapImage GetCommandImage(String actionParameter, PluginImageSize imageSize) => StatusImages.For(_status, imageSize);
     }
 
 }

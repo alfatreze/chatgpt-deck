@@ -32,6 +32,7 @@
     <EmbeddedResource Include="../../assets/openai.png" Link="Resources/openai.png" />
     <EmbeddedResource Include="../../assets/interrupt-attention.png" Link="Resources/interrupt-attention.png" />
     <EmbeddedResource Include="../../assets/status/*.png" Link="Resources/status/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../assets/status-runtime/*.png" Link="Resources/status-runtime/%(Filename)%(Extension)" />
   </ItemGroup>
 
   <Target Name="CopyPackage" AfterTargets="PostBuildEvent">

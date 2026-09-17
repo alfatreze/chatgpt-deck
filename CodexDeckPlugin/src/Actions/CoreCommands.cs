@@ -37,7 +37,7 @@ namespace Loupedeck.CodexDeckPlugin
             var feedback = _status == ProtocolConstants.Unavailable ? "Permission needed — Open Settings" : view.Feedback;
             return view.Label + Environment.NewLine + feedback;
         }
-        protected override BitmapImage GetCommandImage(string actionParameter, PluginImageSize imageSize) => StatusImages.For(_status);
+        protected override BitmapImage GetCommandImage(string actionParameter, PluginImageSize imageSize) => StatusImages.For(_status, imageSize);
     }
 
 }

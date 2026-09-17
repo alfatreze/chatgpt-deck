@@ -1699,4 +1699,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** `CodexDeck.log` recorded `Status image requested: unavailable`; the active `ActionIcons/$CodexDeck___...ContinueNewTaskCommand.ict` defined `backgroundColor`, `text`, and `textColor`.
 - **Applicability:** Any dynamic Loupedeck/Logi Actions command with user-customized Icon Editor styling.
 - **Reusable recommendation:** When a dynamic frame appears frozen, inspect the active profile's `ActionIcons` overrides before changing PNGs or callback code. Preserve user styling by moving the exact conflicting `.ict` to a recoverable backup, then reload the plugin.
+
+## 203. Use host-sized PNGs and BitmapBuilder for runtime button frames (2026-09-17)
+
+- **Environment:** macOS Logi Actions C# SDK runtime image path.
+- **Observation:** Plugin logs confirmed `GetCommandImage` calls and resource lookup, but raw 256px source images did not visibly render on the reference surface.
+- **Evidence:** Official SDK guidance specifies 80×80 embedded PNGs for runtime button images and demonstrates composing them through `BitmapBuilder(imageSize).SetBackgroundImage(...)`.
+- **Applicability:** Dynamic bitmap feedback on Loupedeck/Logi Actions devices.
+- **Reusable recommendation:** Retain high-resolution RGBA masters, generate 80×80 RGBA runtime derivatives, and return a `BitmapBuilder` image at the requested size. Do not treat PNG compression level as a compatibility choice; use PNG rather than JPEG/SVG for this runtime path.
 # Plugin development findings — curated engineering knowledge
