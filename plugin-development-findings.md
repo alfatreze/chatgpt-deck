@@ -1635,4 +1635,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** `strings PluginApi.dll` found the public-surface names; ApiInspector reported missing `SkiaSharp, Version=2.88.0.0`.
 - **Applicability:** SDK/API inspection for managed plugin hosts.
 - **Reusable recommendation:** Treat symbol presence as a lead, not proof of usable signatures; run reflection from the host dependency directory and capture a loadable signature record before implementing editor actions.
+
+## 195. Host assembly inspection may require the complete dependency closure (2026-09-17)
+
+- **Environment:** macOS Logi Plugin Service ARM64 bundle and ApiInspector.
+- **Observation:** Supplying the missing SkiaSharp assembly revealed a second missing dependency (`Newtonsoft.Json 13.0.0`), so copying one dependency is insufficient for reliable reflection.
+- **Evidence:** ApiInspector progressed past SkiaSharp and then reported Newtonsoft.Json missing.
+- **Applicability:** Managed SDK inspection across vendor application bundles.
+- **Reusable recommendation:** Inspect from the complete host dependency directory or build a resolver for the full assembly closure; do not infer API signatures from partial-load results.
 # Plugin development findings — curated engineering knowledge
