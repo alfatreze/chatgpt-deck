@@ -14,7 +14,7 @@ namespace Loupedeck.CodexDeckPlugin
         public OpenCodexCommand()
             : base(displayName: "Open Codex", description: "Open or focus the Codex desktop app", groupName: "Commands")
         {
-            _adapter = new ShortcutAdapter(new MacCodexDispatcher(), new OpenCodexFocusGuard());
+            _adapter = new CompanionAdapter();
         }
 
         protected override void RunCommand(String actionParameter)
@@ -49,25 +49,4 @@ namespace Loupedeck.CodexDeckPlugin
             PluginResources.ReadImage("openai.png");
     }
 
-    internal sealed class MacCodexDispatcher : IShortcutDispatcher
-    {
-        public bool CanDispatch(string action) => action == "open_codex";
-
-        public bool Dispatch(string action)
-        {
-            using var process = System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = "open",
-                Arguments = "-a Codex",
-                UseShellExecute = false,
-                CreateNoWindow = true,
-            });
-            return process is not null;
-        }
-    }
-
-    internal sealed class OpenCodexFocusGuard : IFocusGuard
-    {
-        public bool IsCodexFocused() => true;
-    }
 }
