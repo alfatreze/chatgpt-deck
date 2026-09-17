@@ -1675,4 +1675,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** New controls dispatch through `CompanionAdapter`; the current adapter rejects these actions as unsupported.
 - **Applicability:** Any staged integration where UI scope precedes platform capability evidence.
 - **Reusable recommendation:** Prefer honest unavailable controls over local simulations or inferred success; promote only after adapter capability and physical behavior are verified.
+
+## 200. Record physical validation separately from capability completion (2026-09-17)
+
+- **Environment:** macOS Loupedeck host with provided status-image assets.
+- **Observation:** User validation can confirm editor registration, rendering, and feedback behavior even while the underlying Codex capability remains unsupported.
+- **Evidence:** User reported all current tests passed after workflow-action and status-image adjustments.
+- **Applicability:** Hardware plugin phased delivery.
+- **Reusable recommendation:** Record physical test success independently from integration capability; do not mark an action complete until both UI behavior and backend capability are verified.
 # Plugin development findings — curated engineering knowledge
