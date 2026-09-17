@@ -1547,4 +1547,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** `MacCodexAdapter` builds, returns `unavailable/not_supported` for unknown actions, and dispatches only the verified shortcut set.
 - **Applicability:** Any staged migration from direct hardware-plugin automation to a local privileged companion.
 - **Reusable recommendation:** Land and test the companion adapter first, then migrate each plugin action and remove its local OS dispatcher; do not mark the architecture complete until no plugin action can invoke OS automation.
+
+## 184. Reconcile protocol documentation with the shipped wire format (2026-09-17)
+
+- **Environment:** .NET 10 companion and loopback client.
+- **Observation:** The deployed bridge is newline-delimited TCP, while the original architecture text incorrectly called it WebSocket.
+- **Evidence:** `TcpListener`/`TcpClient` are used by the companion and plugin; docs now identify the actual transport and its bounded request expectations.
+- **Applicability:** Any local plugin bridge whose transport evolves during scaffolding.
+- **Reusable recommendation:** Treat implementation, schema, tests, and architecture docs as one contract; update all together when the wire protocol is selected.
 # Plugin development findings — curated engineering knowledge
