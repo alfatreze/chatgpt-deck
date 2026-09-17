@@ -1,6 +1,6 @@
 # Initial GitHub handoff checklist
 
-Run only after the Phase 1 exit gate in `docs/05-roadmap.md` passes.
+This records the initial public repository publication. It does not assert that the Phase 1 architecture exit gate has passed; see `docs/18-claude-audit-response.md` and remediation tickets `R1-01` through `R1-04`.
 
 ## Preflight
 

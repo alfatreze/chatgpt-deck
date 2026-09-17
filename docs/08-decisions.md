@@ -27,7 +27,7 @@
 7. Is an official, user-permissioned usage/queue signal available that does not expose private task content?
 
 An agent may investigate an open question and update this document with source/evidence. It must not silently convert an unanswered question into a product guarantee.
-## ADR-009 — Defer SDK Action Editor adoption until host support is proven
+## ADR-015 — Defer SDK Action Editor adoption until host support is proven
 
 **Status:** Accepted pending reproducible registration proof (2026-09-17)
 

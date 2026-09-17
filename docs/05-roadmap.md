@@ -49,6 +49,21 @@ The first release optimizes for the loop a developer repeats many times a day: *
 
 **Exit gate:** templates are editable and launch reliably through configured paths; profile round-trip preserves mappings; manual accessibility checks pass.
 
+## Phase 1 remediation — bridge integrity (required before Phase 2 feature work)
+
+**Objective:** make the running implementation conform to the local companion architecture.
+
+- Move macOS shortcut automation and focus guards from the Loupedeck plugin into the companion's OS-specific adapter.
+- Route all user-facing plugin actions through authenticated companion intents and render only the returned receipt/state.
+- Validate action names server-side; never fabricate an `accepted` receipt for an unknown action.
+- Reconcile the documented WebSocket transport with the implemented newline-JSON TCP transport; choose one and make schema, protocol document, and implementation agree.
+- Support concurrent or bounded-timeout clients so a stalled client cannot wedge all consumers.
+- Default to the platform-secure token store on macOS; preserve explicit development-only plaintext opt-out.
+- Correct endpoint-file write order so user-only permissions are in place before publication.
+- Add integration tests against the actual companion server, including authentication, unknown action, focus-unavailable, malformed input, and reconnect behavior.
+
+**Exit gate:** no plugin action performs OS automation directly; the companion returns truthful receipts for all supported actions; protocol documentation describes the deployed transport; and real-server integration tests pass.
+
 ## Phase 3 — Verified live state (time-boxed 2-week spike, then 2–4 weeks if viable)
 
 **Objective:** add real agent awareness without scraping or overstating state.
@@ -74,6 +89,7 @@ The first release optimizes for the loop a developer repeats many times a day: *
 - Additional Loupedeck models and OS support.
 - Signed installers, migrations, crash recovery, compatibility diagnostics.
 - Accessibility audit, performance profiling, and documentation examples.
+- Evaluate a **ChatGPT Desktop** target as a separate, opt-in adapter/product profile. It must not reuse Codex bundle IDs, shortcuts, permissions, or capability claims by assumption. Define its supported controls, privacy boundary, platform adapters, and official integration evidence before implementation. The companion boundary remediation above is a prerequisite so ChatGPT becomes an additional target adapter/configuration, not a plugin fork.
 
 ## Phase 6 — Community-informed stretch validation (time-boxed, no committed release scope)
 

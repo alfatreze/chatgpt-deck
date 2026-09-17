@@ -1531,4 +1531,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** User confirmation following plugin reload.
 - **Applicability:** Reference host rendering; other devices remain unverified.
 - **Reusable recommendation:** Close the loop on UI fixes with explicit user-visible confirmation, not only build or log evidence.
+
+## 182. A bridge scaffold is not an enforced automation boundary (2026-09-17)
+
+- **Environment:** Loupedeck plugin plus local companion architecture review.
+- **Observation:** A companion can compile, authenticate a health probe, and expose protocol models while user-facing actions still bypass it through direct plugin-side OS automation.
+- **Evidence:** Independent architecture audit verified direct plugin `osascript` dispatch and companion-side fabricated accepted receipts.
+- **Applicability:** Any hardware-plugin/companion architecture intended to isolate privileged desktop automation.
+- **Reusable recommendation:** Verify the runtime call path for every user action; require the companion to validate, dispatch, and return truthful receipts before claiming that an automation boundary or pairing model is enforced.
 # Plugin development findings — curated engineering knowledge

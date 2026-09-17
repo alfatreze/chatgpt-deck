@@ -30,6 +30,7 @@ The full prioritized scope and success criteria are in [the roadmap](docs/05-roa
 | [Plugin development findings](plugin-development-findings.md) | Living implementation reference from a tested Loupedeck/Logi Actions plugin |
 | [Pairing hardening](docs/14-pairing-hardening.md) | Release security and recovery checklist for the local companion |
 | [GitHub handoff](docs/16-github-handoff.md) | Phase 1 publication preflight and verification checklist |
+| [Claude audit response](docs/18-claude-audit-response.md) | Architecture gap disposition, remediation, and ChatGPT Desktop future track |
 | [Usage and credits design](docs/15-usage-credits-design.md) | Capability-gated read-only usage, reset, and credit display |
 | [macOS manual test](docs/17-macos-manual-test.md) | Reproducible permission and New Task validation steps |
 
@@ -71,7 +72,7 @@ Important discoveries are deliberately recorded there for future plugins too. Ev
 
 ## Build status
 
-Phase 0 is complete for the reference Loupedeck Live scaffold. The plugin now exposes eight dynamic actions, including guarded single- and double-stage interrupt controls, a localhost companion transport, authenticated endpoint discovery, dynamic permission feedback, and connection diagnostics. The normal Interrupt action shows a red attention frame and `Press again to interrupt` after the first accepted Escape. Action Editor registration and broader physical/device-matrix validation remain tracked P1 work; see [the development environment baseline](docs/10-development-environment.md) and [the backlog](docs/06-backlog.md).
+Phase 0 is complete for the reference Loupedeck Live scaffold. The plugin now exposes eight dynamic actions, including guarded single- and double-stage interrupt controls, a localhost companion transport, authenticated endpoint discovery, dynamic permission feedback, and connection diagnostics. The normal Interrupt action shows a red attention frame and `Press again to interrupt` after the first accepted Escape. The current runtime is a physically tested macOS scaffold, not yet a fully conformant companion-owned automation architecture; bridge remediation is tracked before Phase 2 work. See [the audit response](docs/18-claude-audit-response.md), [development environment baseline](docs/10-development-environment.md), and [backlog](docs/06-backlog.md).
 
 ## Verification shortcuts
 
