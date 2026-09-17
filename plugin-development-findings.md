@@ -1571,4 +1571,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Direct run returned `SocketException (13): Permission denied`; the same integration test passed when executed with explicit local socket permission.
 - **Applicability:** Any plugin companion integration test that binds localhost during automated development.
 - **Reusable recommendation:** Distinguish sandbox/network-policy failures from product failures and document the required elevated test invocation.
+
+## 187. Reconnect tests should repeat the full hello contract (2026-09-17)
+
+- **Environment:** .NET 10 loopback companion integration smoke.
+- **Observation:** A reconnect is only useful if it re-authenticates and returns a fresh hello acknowledgement, not merely if the TCP socket can be reopened.
+- **Evidence:** The live smoke now opens a second authenticated connection and validates `hello.ack` after testing an unauthorized connection.
+- **Applicability:** Local companion bridges and reconnecting hardware clients.
+- **Reusable recommendation:** Test reconnect as a complete protocol handshake, including authentication and snapshot delivery.
 # Plugin development findings — curated engineering knowledge

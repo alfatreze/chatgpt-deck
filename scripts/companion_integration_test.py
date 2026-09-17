@@ -18,11 +18,15 @@ try:
             return json.loads(s.makefile().readline())
     hello = exchange({"type":"hello","protocolVersion":1,"token":"integration-test-token"})
     assert hello["type"] == "hello.ack"
+    denied = exchange({"type":"hello","protocolVersion":1,"token":"wrong-token"})
+    assert denied["type"] == "error" and denied["reason"] == "unauthorized"
     unknown = exchange({"type":"action.intent","protocolVersion":1,"id":"00000000-0000-0000-0000-000000000001","action":"unknown_action","token":"integration-test-token"})
     assert unknown["status"] == "unavailable" and unknown["reason"] == "not_supported"
     malformed = exchange({"type":"action.intent","protocolVersion":1,"action":"interrupt","token":"integration-test-token"})
     assert malformed["type"] == "error"
-    print("Companion integration smoke passed: hello, auth, unsupported action, malformed input")
+    reconnect = exchange({"type":"hello","protocolVersion":1,"token":"integration-test-token"})
+    assert reconnect["type"] == "hello.ack"
+    print("Companion integration smoke passed: hello, auth, unauthorized, unsupported, malformed, reconnect")
 finally:
     proc.terminate()
     try: proc.wait(timeout=3)
