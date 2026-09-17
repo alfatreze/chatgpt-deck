@@ -22,6 +22,8 @@ public sealed class MacCodexAdapter : ICodexAdapter
         cancellationToken.ThrowIfCancellationRequested();
         if (!Supported.Contains(intent.Action))
             return Task.FromResult(Receipt(intent, ProtocolConstants.Unavailable, ProtocolConstants.NotSupported));
+        if (string.Equals(Environment.GetEnvironmentVariable("CODEX_DECK_DISABLE_AUTOMATION"), "1", StringComparison.Ordinal))
+            return Task.FromResult(Receipt(intent, ProtocolConstants.Failed, ProtocolConstants.ExecutionFailed));
 
         var (file, args) = intent.Action switch
         {

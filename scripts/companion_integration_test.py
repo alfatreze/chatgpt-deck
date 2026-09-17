@@ -3,7 +3,7 @@ import json, os, socket, subprocess, time, stat
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 port = 62680
-env = dict(os.environ, CODEX_DECK_TOKEN="integration-test-token", CODEX_DECK_TOKEN_STORE="file", CODEX_DECK_PORT=str(port))
+env = dict(os.environ, CODEX_DECK_TOKEN="integration-test-token", CODEX_DECK_TOKEN_STORE="file", CODEX_DECK_DISABLE_AUTOMATION="1", CODEX_DECK_PORT=str(port))
 binary = os.path.join(root, "companion/CodexDeck.Companion/bin/Debug/net10.0/CodexDeck.Companion.dll")
 proc = subprocess.Popen(["dotnet", binary], cwd=root, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
 try:
@@ -30,6 +30,8 @@ try:
     assert malformed["type"] == "error"
     bad_id = exchange({"type":"action.intent","protocolVersion":1,"id":"not-a-guid","action":"interrupt","token":"integration-test-token"})
     assert bad_id["type"] == "error" and bad_id["reason"] == "invalid_message"
+    failed = exchange({"type":"action.intent","protocolVersion":1,"id":"00000000-0000-0000-0000-000000000002","action":"interrupt","token":"integration-test-token"})
+    assert failed["status"] == "failed" and failed["reason"] == "execution_failed"
     reconnect = exchange({"type":"hello","protocolVersion":1,"token":"integration-test-token"})
     assert reconnect["type"] == "hello.ack"
     print("Companion integration smoke passed: hello, auth, unauthorized, unsupported, malformed-id, reconnect")
