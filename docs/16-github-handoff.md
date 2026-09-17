@@ -25,7 +25,7 @@ Do not publish while pairing secrets, local endpoint files, host logs, or unrevi
 ## Publication record
 
 - Repository: [alfatreze/chatgpt-deck](https://github.com/alfatreze/chatgpt-deck)
-- Visibility: Private
+- Visibility: Public
 - License: MIT
 - Initial commit: `c08b5a3`
 - Publication date: 2026-09-17
