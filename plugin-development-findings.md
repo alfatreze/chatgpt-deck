@@ -1659,4 +1659,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** ApiInspector enumerated `ActionEditorCommand`, `ActionEditorAction`, `ActionEditorTextbox`, `ActionEditorListbox`, and `ActionEditor.AddControl<T>`.
 - **Applicability:** C# Actions SDK editor implementations on this host family.
 - **Reusable recommendation:** Capture signatures only after resolving the host’s full managed dependency closure; this is now sufficient evidence to prototype an editor action, but not yet evidence that registration and persistence work end-to-end.
+
+## 198. Compile Action Editor probes before physical registration (2026-09-17)
+
+- **Environment:** C# plugin targeting .NET 10 with installed macOS PluginApi.
+- **Observation:** A minimal `ActionEditorCommand` using the verified constructor and `AddControlEx` compiles, while host registration still requires hardware validation.
+- **Evidence:** `ReviewTemplateEditorCommand` compiles with a listbox control; post-build development-link creation is sandbox-blocked, so physical appearance is unverified.
+- **Applicability:** Incremental SDK feature adoption.
+- **Reusable recommendation:** Separate compile/API evidence from host registration evidence and require a physical assignment test before marking an editor feature complete.
 # Plugin development findings — curated engineering knowledge
