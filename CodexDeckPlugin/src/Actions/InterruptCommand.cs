@@ -40,9 +40,8 @@ public sealed class InterruptCommand : PluginDynamicCommand
 
     protected override BitmapImage GetCommandImage(string actionParameter, PluginImageSize imageSize)
     {
-        var resource = _status == "interrupt_again" ? "interrupt-attention.png" : "openai.png";
-        try { return PluginResources.ReadImage(resource); }
-        catch (FileNotFoundException) { return PluginResources.ReadImage("openai.png"); }
+        if (_status == "interrupt_again") return PluginResources.ReadImage("interrupt-attention.png");
+        return StatusImages.For(_status);
     }
 }
 
