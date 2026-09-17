@@ -1643,4 +1643,20 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** ApiInspector progressed past SkiaSharp and then reported Newtonsoft.Json missing.
 - **Applicability:** Managed SDK inspection across vendor application bundles.
 - **Reusable recommendation:** Inspect from the complete host dependency directory or build a resolver for the full assembly closure; do not infer API signatures from partial-load results.
+
+## 196. Dependency closure continues beyond core rendering libraries (2026-09-17)
+
+- **Environment:** Logi Plugin Service Tool bundle, macOS ARM64.
+- **Observation:** After supplying PluginApi, SkiaSharp, and Newtonsoft.Json, reflection reported `YamlDotNet 16.0.0` as another required assembly.
+- **Evidence:** ApiInspector progressed through each missing dependency in sequence.
+- **Applicability:** Vendor-managed .NET plugin hosts with bundled serializers/rendering libraries.
+- **Reusable recommendation:** Implement directory-based assembly resolution against the host bundle; manual dependency copying is brittle and obscures whether the target API is actually loadable.
+
+## 197. Action Editor API is loadable with the complete host dependency set (2026-09-17)
+
+- **Environment:** macOS ARM64 Logi Plugin Service Tool bundle with PluginApi, SkiaSharp, Newtonsoft.Json, and YamlDotNet resolved.
+- **Observation:** Reflection successfully loads the Action Editor surface and exposes typed controls and command/action collections.
+- **Evidence:** ApiInspector enumerated `ActionEditorCommand`, `ActionEditorAction`, `ActionEditorTextbox`, `ActionEditorListbox`, and `ActionEditor.AddControl<T>`.
+- **Applicability:** C# Actions SDK editor implementations on this host family.
+- **Reusable recommendation:** Capture signatures only after resolving the host’s full managed dependency closure; this is now sufficient evidence to prototype an editor action, but not yet evidence that registration and persistence work end-to-end.
 # Plugin development findings — curated engineering knowledge

@@ -28,7 +28,9 @@ catch (FileNotFoundException error)
     Console.Error.WriteLine($"Dependency missing: {error.FileName}");
     return 3;
 }
-foreach (var type in exported.Where(t => t.Name.Contains("BitmapImage", StringComparison.OrdinalIgnoreCase) || t.Name.Contains("Image", StringComparison.OrdinalIgnoreCase)))
+foreach (var type in exported.Where(t => t.Name.Contains("BitmapImage", StringComparison.OrdinalIgnoreCase)
+    || t.Name.Contains("Image", StringComparison.OrdinalIgnoreCase)
+    || t.Name.Contains("ActionEditor", StringComparison.OrdinalIgnoreCase)))
 {
     Console.WriteLine($"TYPE {type.FullName}");
     foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly).OrderBy(m => m.Name))
