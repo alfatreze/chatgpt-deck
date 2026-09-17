@@ -1627,4 +1627,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Hello snapshots now derive capabilities and idle action states directly from `ICodexAdapter.ProbeAsync`.
 - **Applicability:** Any plugin/companion protocol with capability-gated actions.
 - **Reusable recommendation:** Make the adapter probe the single source for advertised actions; never duplicate capability registries in the transport handler.
+
+## 194. SDK assembly contains Action Editor surface but load inspection can be dependency-sensitive (2026-09-17)
+
+- **Environment:** Installed macOS `PluginApi.dll` from Logi Plugin Service.
+- **Observation:** Raw assembly strings expose `ActionEditorCommandCollection`, `ActionEditorTextboxBase`, `LoadActionEditorActions`, and related controls, but reflection inspection failed when the inspector was not run with the host's SkiaSharp dependency context.
+- **Evidence:** `strings PluginApi.dll` found the public-surface names; ApiInspector reported missing `SkiaSharp, Version=2.88.0.0`.
+- **Applicability:** SDK/API inspection for managed plugin hosts.
+- **Reusable recommendation:** Treat symbol presence as a lead, not proof of usable signatures; run reflection from the host dependency directory and capture a loadable signature record before implementing editor actions.
 # Plugin development findings — curated engineering knowledge
