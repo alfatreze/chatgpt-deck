@@ -1555,4 +1555,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** `TcpListener`/`TcpClient` are used by the companion and plugin; docs now identify the actual transport and its bounded request expectations.
 - **Applicability:** Any local plugin bridge whose transport evolves during scaffolding.
 - **Reusable recommendation:** Treat implementation, schema, tests, and architecture docs as one contract; update all together when the wire protocol is selected.
+
+## 185. Bound idle bridge reads (2026-09-17)
+
+- **Environment:** .NET 10 newline-delimited TCP companion.
+- **Observation:** A connected client that sends no complete line can otherwise hold a server task indefinitely.
+- **Evidence:** Companion now applies a 15-second cancellation deadline to each line read and closes the idle client cleanly.
+- **Applicability:** Local socket bridges and plugin companion services.
+- **Reusable recommendation:** Bound both connect and read operations; treat timeout as a recoverable disconnect rather than allowing an idle client to consume a handler forever.
 # Plugin development findings — curated engineering knowledge
