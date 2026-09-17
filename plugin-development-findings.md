@@ -1683,4 +1683,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** User reported all current tests passed after workflow-action and status-image adjustments.
 - **Applicability:** Hardware plugin phased delivery.
 - **Reusable recommendation:** Record physical test success independently from integration capability; do not mark an action complete until both UI behavior and backend capability are verified.
+
+## 201. Unsupported controls should not present an idle-ready state (2026-09-17)
+
+- **Environment:** Loupedeck dynamic actions with no advertised companion capability.
+- **Observation:** Initial `idle` mapping rendered “Ready,” which users reasonably interpreted as functional support.
+- **Evidence:** Fast Mode and Continue in New Task showed Ready despite returning unsupported receipts.
+- **Applicability:** Capability-gated hardware controls.
+- **Reusable recommendation:** Initialize controls to unavailable until a capability probe succeeds; reserve Ready for an actionable, verified path.
 # Plugin development findings — curated engineering knowledge
