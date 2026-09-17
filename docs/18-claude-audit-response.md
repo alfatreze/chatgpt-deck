@@ -6,6 +6,8 @@ The audit correctly identifies a material architecture divergence: the Loupedeck
 
 The current repository remains a useful, physically tested macOS scaffold, but it must not be described as a fully conformant Phase 1 architecture. The remediation work is tracked as `R1-01` through `R1-04` in `docs/06-backlog.md` and is required before Phase 2 feature work.
 
+Implementation status: the first R1-01 slice now exists in `companion/CodexDeck.Companion/MacCodexAdapter.cs`. It validates supported actions and produces real dispatch receipts; plugin-side migration remains outstanding.
+
 ## Verified audit findings
 
 - The companion uses sequential newline-delimited TCP JSON, not the WebSocket transport described in `docs/04-protocol-and-state.md`.

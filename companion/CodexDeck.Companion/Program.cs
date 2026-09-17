@@ -20,6 +20,7 @@ Console.CancelKeyPress += (_, eventArgs) =>
     listener.Stop();
 };
 Console.WriteLine($"Codex Deck companion listening on {activePort}");
+var adapter = OperatingSystem.IsMacOS() ? new CodexDeck.Companion.MacCodexAdapter() : null;
 
 try
 {
@@ -57,17 +58,25 @@ while (true)
                 await writer.WriteLineAsync(System.Text.Json.JsonSerializer.Serialize(response, ProtocolJson.Options));
                 continue;
             }
-            var receiptResponse = messageType switch
+            if (messageType == "action.intent")
             {
-                "action.intent" when envelope.RootElement.TryGetProperty("id", out var id)
-                    && id.ValueKind == System.Text.Json.JsonValueKind.String
-                    && envelope.RootElement.TryGetProperty("action", out var action)
-                    && action.ValueKind == System.Text.Json.JsonValueKind.String
-                    => $"{{\"type\":\"action.receipt\",\"protocolVersion\":1,\"id\":\"{id.GetString()}\",\"status\":\"accepted\"}}",
-                "action.intent" => "{\"type\":\"error\",\"protocolVersion\":1,\"reason\":\"invalid_message\"}",
-                _ => "{\"type\":\"error\",\"protocolVersion\":1,\"reason\":\"unsupported\"}",
-            };
-            await writer.WriteLineAsync(receiptResponse);
+                if (!envelope.RootElement.TryGetProperty("id", out var id)
+                    || !envelope.RootElement.TryGetProperty("action", out var action)
+                    || id.ValueKind != System.Text.Json.JsonValueKind.String
+                    || action.ValueKind != System.Text.Json.JsonValueKind.String)
+                {
+                    await writer.WriteLineAsync("{\"type\":\"error\",\"protocolVersion\":1,\"reason\":\"invalid_message\"}");
+                    continue;
+                }
+                var intent = new ActionIntent(ProtocolConstants.ActionIntentType, ProtocolConstants.CurrentVersion,
+                    Guid.Parse(id.GetString()!), action.GetString()!);
+                var receipt = adapter is null
+                    ? new ActionReceipt(ProtocolConstants.ActionReceiptType, ProtocolConstants.CurrentVersion, intent.Id, ProtocolConstants.Unavailable, ProtocolConstants.NotSupported)
+                    : await adapter.DispatchAsync(intent, CancellationToken.None);
+                await writer.WriteLineAsync(System.Text.Json.JsonSerializer.Serialize(receipt, ProtocolJson.Options));
+                continue;
+            }
+            await writer.WriteLineAsync("{\"type\":\"error\",\"protocolVersion\":1,\"reason\":\"unsupported\"}");
         }
         catch (Exception)
         {

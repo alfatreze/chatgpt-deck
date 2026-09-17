@@ -1539,4 +1539,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Independent architecture audit verified direct plugin `osascript` dispatch and companion-side fabricated accepted receipts.
 - **Applicability:** Any hardware-plugin/companion architecture intended to isolate privileged desktop automation.
 - **Reusable recommendation:** Verify the runtime call path for every user action; require the companion to validate, dispatch, and return truthful receipts before claiming that an automation boundary or pairing model is enforced.
+
+## 183. Build the companion adapter before migrating plugin actions (2026-09-17)
+
+- **Environment:** .NET 10 companion and shared protocol on macOS.
+- **Observation:** A platform adapter provides a bounded migration seam; unsupported actions can fail closed while existing plugin actions remain temporarily functional.
+- **Evidence:** `MacCodexAdapter` builds, returns `unavailable/not_supported` for unknown actions, and dispatches only the verified shortcut set.
+- **Applicability:** Any staged migration from direct hardware-plugin automation to a local privileged companion.
+- **Reusable recommendation:** Land and test the companion adapter first, then migrate each plugin action and remove its local OS dispatcher; do not mark the architecture complete until no plugin action can invoke OS automation.
 # Plugin development findings — curated engineering knowledge
