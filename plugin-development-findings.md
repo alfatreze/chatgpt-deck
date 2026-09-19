@@ -1731,4 +1731,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** The status comparison uses a full-bleed fill, an inset status rail, and a rounded frame built from rectangles and four circles.
 - **Applicability:** Dynamic hardware-button feedback without external image dependencies.
 - **Reusable recommendation:** Start with native primitives for status shells. Maintain textual labels outside the color treatment and validate small-device legibility on physical hardware.
+
+## 207. Keep image-surface capabilities separate from visual product choices (2026-09-19)
+
+- **Environment:** macOS Logi Actions C# plugin using dynamic commands and `BitmapBuilder`.
+- **Observation:** A plugin has several distinct image surfaces: package identity, action-picker symbols, static embedded images, dynamic `GetCommandImage()` frames, native bitmap primitives, and host-rendered labels. They have different lifecycle and override behavior.
+- **Evidence:** Codex Deck now documents and maps each surface separately; native full fills, rails, and rounded frames render on hardware, while externally sourced runtime PNG frames previously invoked the callback without visibly rendering.
+- **Applicability:** General plugin visual design and UX planning; the rendering reliability observation is host/runtime-specific to the tested macOS setup.
+- **Reusable recommendation:** Treat the host label as the semantic layer, use native primitives as the baseline for dynamic status shells, and introduce raster/SVG artwork as a separately verified composition step. Document the chosen insertion method per action so future visual redesigns do not accidentally replace a reliable runtime path or hide dynamic feedback with a static profile override.
 # Plugin development findings — curated engineering knowledge
