@@ -1779,4 +1779,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Focus reset restored the packaged target icon; build output contains `actionicons/`; installed plugins also store action icons under that folder. The host’s visible library is populated by named Logi/user collections.
 - **Applicability:** Host UI indexing/discovery behavior; default action icon recognition is proven, library collection indexing remains unverified and may not be exposed to development-linked plugins.
 - **Reusable recommendation:** Treat `actionicons` as the default/reset artwork contract. Do not promise a browsable library collection unless it is verified with a packaged installation and the target host version; avoid destructive cache cleanup while investigating.
+
+## 213. Package acceptance can be followed by plugin-load rollback (2026-09-19)
+
+- **Environment:** macOS Loupedeck installer, Codex Deck `.lplug4`, .NET 10 plugin.
+- **Observation:** The installer displayed a success message, then the app reported an error and no installed CodexDeck plugin directory remained; only the development-link backup was present.
+- **Evidence:** Filesystem inspection after the attempt showed no installed `CodexDeckPlugin.dll` or manifest, and the plugin log contained no successful packaged-load entry. The development link restored the known-working plugin.
+- **Applicability:** Packaged installation/load path; distinct from development-link loading and from archive acceptance.
+- **Reusable recommendation:** Verify three separate milestones: archive acceptance, installed-plugin directory creation, and post-install plugin load. Keep the development link backed up and restore it before further packaging experiments. Investigate runtime/manifest compatibility before treating package acceptance as installation success.
 # Plugin development findings — curated engineering knowledge

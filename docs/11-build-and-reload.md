@@ -2,6 +2,8 @@
 
 This procedure is intentionally incomplete until the Phase 0 SDK/runtime discovery finishes. It is a guardrail against a common false positive: a C# package may build successfully but fail to load in Logi Plugin Service.
 
+For direct-install package experiments, use `scripts/pack-lplug4.py Debug` after a successful build. Treat the installer’s success dialog as archive acceptance only; verify that an installed plugin directory is created and that the service loads the packaged DLL before disabling the development link permanently. Keep the `.link` backup reversible during these tests.
+
 ## Build gate
 
 Before adding a production action, verify all of the following on the reference host:

@@ -18,7 +18,7 @@ description: Add a short description of the plugin here.
 pluginFileName: CodexDeckPlugin.dll
 
 # Plugin version.
-version: 1.0
+version: 1.0.0
 
 # Author of the plugin. The author can be a company or an individual developer.
 author: abel.santos
