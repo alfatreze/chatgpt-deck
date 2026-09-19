@@ -40,7 +40,7 @@ This section is the visual-design reference for future UX passes. It distinguish
 | Surface | How it is supplied | Best use | Current status |
 | --- | --- | --- | --- |
 | Package icon | Required packaged raster (`Icon256x256.png`) | Plugin identity in the host | In use; source artwork may be SVG, but the package uses a raster derivative |
-| Action-picker icon | Small embedded SVG/resource symbol | Identifying an action while configuring a button | Supported; use a recolorable `currentColor` SVG where appropriate |
+| Action-picker icon | SVG in the packaged `actionsymbols/` folder, named for the action class | Identifying an action while configuring a button | Now applied for Focus, Double-Press Interrupt, and Permissions using filled-path outline SVGs |
 | Static action image | Embedded PNG returned by `PluginResources.ReadImage(...)` | A stable icon or a small finite set of known frames | Supported; `interrupt-attention.png` is in use |
 | Dynamic action image | `GetCommandImage(...)`, invalidated with `ActionImageChanged()` | State-dependent feedback | Supported and physically verified |
 | Host text label | `GetCommandDisplayName(...)` | Action name, state, result, and instructions | Required semantic layer; do not replace it with color or artwork |
@@ -67,16 +67,16 @@ The temporary Tabler set in `assets/tabler/` uses `external-link`, `target`, `pl
 | Action/control | Dynamic state image method | Composition | Semantic/status text |
 | --- | --- | --- | --- |
 | Open Codex | `StatusImages.For` | Full-frame native fill | Host label plus transient receipt state |
-| Focus Codex | Host default currently | Tabler source reserved for transparent raster conversion | Host label; action is intentionally simple |
+| Focus Codex | Packaged action symbol plus host default runtime image | Filled-path outline `target` symbol in the action picker | Host label; action is intentionally simple |
 | New Task | `StatusImages.For` | Full-frame native fill | Host label plus unavailable/permission guidance |
 | Interrupt Codex | `StatusImages.For`, with embedded `interrupt-attention.png` for the second-press state | Native fill normally; embedded attention frame during confirmation | Host label changes to “Press again to interrupt” |
-| Interrupt Codex (Double Press) | Host default currently | Tabler source reserved for transparent raster conversion | Host label plus receipt state |
+| Interrupt Codex (Double Press) | Packaged action symbol plus host default runtime image | Filled-path outline `player-stop` symbol in the action picker | Host label plus receipt state |
 | Fast Mode | `StatusImages.For(..., FullBleed)` | Full-frame native fill | Host label plus status |
 | Continue in New Task | `StatusImages.For(..., InsetRail)` | Dark field with colored status rail | Host label plus status |
 | Companion Status | `StatusImages.For(..., RoundedFrame)` | Rounded colored border with dark center | Host label plus connection state |
 | Counter | `StatusImages.For` | Full-frame native fill | Host label plus counter/status |
 | Test Permissions | Host default currently | Text-led diagnostic feedback; dynamic image treatment remains available for a later pass | Host label plus permission guidance |
-| Permissions & Connection | Host default currently | Tabler source reserved for transparent raster conversion | Host label plus permission guidance |
+| Permissions & Connection | Packaged action symbol plus host default runtime image | Filled-path outline `shield-check` symbol in the action picker | Host label plus permission guidance |
 
 ### Design and verification rules
 

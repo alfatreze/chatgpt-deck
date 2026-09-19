@@ -13,4 +13,4 @@ These outline SVGs are temporary visual defaults for the first working plugin pa
 | `plug-connected.svg` | Companion Status |
 | `shield-check.svg` | Permissions & Connection |
 
-These are source/design assets, not yet substituted into dynamic status frames. The current reliable runtime path remains native `BitmapBuilder` status shells, while the host-rendered label supplies the action and state text. During the dedicated visual-design phase, each glyph can be tested as a static action image or composed over a native shell after physical rendering is verified.
+The `outline/` files are filled-path outline masters and are now used as action-picker symbols for three actions under `CodexDeckPlugin/src/package/actionsymbols/`. The `line/` files retain the original stroke-based alternatives. Neither set is substituted into dynamic status frames. The current reliable runtime path remains native `BitmapBuilder` status shells, while the host-rendered label supplies the action and state text.
