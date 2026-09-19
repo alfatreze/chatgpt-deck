@@ -41,7 +41,7 @@ This section is the visual-design reference for future UX passes. It distinguish
 | --- | --- | --- | --- |
 | Package icon | Required packaged raster (`Icon256x256.png`) | Plugin identity in the host | In use; source artwork may be SVG, but the package uses a raster derivative |
 | Action-picker symbol | SVG in the packaged `actionsymbols/` folder, named for the action class | Small symbol beside an action name in the picker | Applied for Focus, Double-Press Interrupt, and Permissions using filled-path outline SVGs |
-| Icon Library/action icon | SVG in the packaged `actionicons/` folder, named for the action class | Reusable artwork shown in the host Icon Library and action icon editor | Applied for the current core, workflow, interrupt, connection, and permissions actions |
+| Default action icon | SVG in the packaged `actionicons/` folder, named for the action class | Default artwork applied when an action is added or reset | Applied for the current core, workflow, interrupt, connection, and permissions actions; host library discoverability is not guaranteed |
 | Static action image | Embedded PNG returned by `PluginResources.ReadImage(...)` | A stable icon or a small finite set of known frames | Supported; `interrupt-attention.png` is in use |
 | Dynamic action image | `GetCommandImage(...)`, invalidated with `ActionImageChanged()` | State-dependent feedback | Supported and physically verified |
 | Host text label | `GetCommandDisplayName(...)` | Action name, state, result, and instructions | Required semantic layer; do not replace it with color or artwork |
@@ -61,14 +61,14 @@ This section is the visual-design reference for future UX passes. It distinguish
 
 Use transparent RGBA PNG or SVG masters for artwork. Keep a 256×256 master for review and generate any smaller runtime derivative explicitly. The SDK documentation references 80×80 button PNGs; PNG compression is lossless and is not a separate rendering mode. Avoid assuming that a valid file will render dynamically: the current host failed to visibly display externally sourced runtime frames while invoking the callback, whereas native `BitmapBuilder` fills rendered correctly.
 
-The temporary Tabler set in `assets/tabler/` uses `external-link`, `target`, `plus`, `player-stop`, `bolt`, `activity`, `plug-connected`, and `shield-check` for the obvious Codex Deck actions. The SVG sources are retained for later transparent PNG conversion, but are not currently used as runtime images because the tested Logi SVG rasterizer rendered a white background despite the source `fill="none"` declaration.
+The temporary Tabler set in `assets/tabler/` uses `external-link`, `target`, `plus`, `player-stop`, `bolt`, `activity`, `plug-connected`, and `shield-check` for the obvious Codex Deck actions. The filled-path `outline/` files are now used as action-picker symbols and default action icons. Resetting Focus Codex to its default restored the packaged target icon, confirming that the `actionicons/` path is recognized. The host may not expose plugin-provided action icons as a browsable Icon Library collection; that is separate from default-icon application. The SVG sources are retained for later visual work and are not used as dynamic runtime images because the tested Logi SVG rasterizer rendered a white background despite the source `fill="none"` declaration.
 
 ### Action-to-method map
 
 | Action/control | Dynamic state image method | Composition | Semantic/status text |
 | --- | --- | --- | --- |
 | Open Codex | `StatusImages.For` | Full-frame native fill | Host label plus transient receipt state |
-| Focus Codex | Packaged action symbol plus host default runtime image | Filled-path outline `target` symbol in the action picker | Host label; action is intentionally simple |
+| Focus Codex | Packaged action symbol and default action icon | Filled-path outline `target` symbol; reset verified the default icon | Host label; action is intentionally simple |
 | New Task | `StatusImages.For` | Full-frame native fill | Host label plus unavailable/permission guidance |
 | Interrupt Codex | `StatusImages.For`, with embedded `interrupt-attention.png` for the second-press state | Native fill normally; embedded attention frame during confirmation | Host label changes to “Press again to interrupt” |
 | Interrupt Codex (Double Press) | Packaged action symbol plus host default runtime image | Filled-path outline `player-stop` symbol in the action picker | Host label plus receipt state |

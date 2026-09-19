@@ -1763,4 +1763,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** The editor showed no CodexDeck icon collection after `actionsymbols` was added; the package now contains full-class-named filled-path SVGs in both folders.
 - **Applicability:** General Logi Actions plugin packaging.
 - **Reusable recommendation:** Add both package surfaces when a plugin needs picker identification and reusable user-selectable artwork. Verify the exact class-name convention and refresh/restart the host before judging discovery.
+
+## 211. Default action-icon application does not prove Icon Library discoverability (2026-09-19)
+
+- **Environment:** macOS Loupedeck editor with Codex Deck package containing class-named `actionicons/*.svg` assets.
+- **Observation:** Resetting the manually customized Focus Codex action restored the packaged filled-path target icon, while no separate CodexDeck collection appeared in the visible Icon Library.
+- **Evidence:** Physical/editor screenshot and user reset test; build output contains the expected `actionicons` files.
+- **Applicability:** Host UI discovery behavior; default action icon application is proven, but collection indexing/caching remains host-specific and unverified.
+- **Reusable recommendation:** Test these outcomes separately: (1) action picker symbol, (2) default icon after add/reset, and (3) browsable Icon Library collection. Do not infer failure of `actionicons` from a missing library folder when reset/add behavior proves the asset is applied.
 # Plugin development findings — curated engineering knowledge
