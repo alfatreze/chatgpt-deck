@@ -15,8 +15,6 @@ namespace Loupedeck.CodexDeckPlugin
             PluginLog.Info($"Focus Codex receipt: {receipt.Status}");
         }
 
-        protected override BitmapImage GetCommandImage(string actionParameter, PluginImageSize imageSize) =>
-            PluginResources.ReadImage("target.svg");
     }
 
     public sealed class NewTaskCommand : PluginDynamicCommand

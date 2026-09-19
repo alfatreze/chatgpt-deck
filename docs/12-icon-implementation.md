@@ -60,23 +60,23 @@ This section is the visual-design reference for future UX passes. It distinguish
 
 Use transparent RGBA PNG or SVG masters for artwork. Keep a 256×256 master for review and generate any smaller runtime derivative explicitly. The SDK documentation references 80×80 button PNGs; PNG compression is lossless and is not a separate rendering mode. Avoid assuming that a valid file will render dynamically: the current host failed to visibly display externally sourced runtime frames while invoking the callback, whereas native `BitmapBuilder` fills rendered correctly.
 
-The temporary Tabler set in `assets/tabler/` uses `external-link`, `target`, `plus`, `player-stop`, `bolt`, `activity`, `plug-connected`, and `shield-check` for the obvious Codex Deck actions. `target`, `player-stop`, and `shield-check` are now applied to the Focus Codex, Interrupt Codex (Double Press), and Permissions & Connection actions respectively. The remaining glyphs are embedded source assets for later visual testing; they do not replace the verified native status shells until a physical composition test succeeds.
+The temporary Tabler set in `assets/tabler/` uses `external-link`, `target`, `plus`, `player-stop`, `bolt`, `activity`, `plug-connected`, and `shield-check` for the obvious Codex Deck actions. The SVG sources are retained for later transparent PNG conversion, but are not currently used as runtime images because the tested Logi SVG rasterizer rendered a white background despite the source `fill="none"` declaration.
 
 ### Action-to-method map
 
 | Action/control | Dynamic state image method | Composition | Semantic/status text |
 | --- | --- | --- | --- |
 | Open Codex | `StatusImages.For` | Full-frame native fill | Host label plus transient receipt state |
-| Focus Codex | Embedded `target.svg` | Static Tabler glyph | Host label; action is intentionally simple |
+| Focus Codex | Host default currently | Tabler source reserved for transparent raster conversion | Host label; action is intentionally simple |
 | New Task | `StatusImages.For` | Full-frame native fill | Host label plus unavailable/permission guidance |
 | Interrupt Codex | `StatusImages.For`, with embedded `interrupt-attention.png` for the second-press state | Native fill normally; embedded attention frame during confirmation | Host label changes to “Press again to interrupt” |
-| Interrupt Codex (Double Press) | Embedded `player-stop.svg` | Static Tabler glyph | Host label plus receipt state |
+| Interrupt Codex (Double Press) | Host default currently | Tabler source reserved for transparent raster conversion | Host label plus receipt state |
 | Fast Mode | `StatusImages.For(..., FullBleed)` | Full-frame native fill | Host label plus status |
 | Continue in New Task | `StatusImages.For(..., InsetRail)` | Dark field with colored status rail | Host label plus status |
 | Companion Status | `StatusImages.For(..., RoundedFrame)` | Rounded colored border with dark center | Host label plus connection state |
 | Counter | `StatusImages.For` | Full-frame native fill | Host label plus counter/status |
 | Test Permissions | Host default currently | Text-led diagnostic feedback; dynamic image treatment remains available for a later pass | Host label plus permission guidance |
-| Permissions & Connection | Embedded `shield-check.svg` | Static Tabler glyph | Host label plus permission guidance |
+| Permissions & Connection | Host default currently | Tabler source reserved for transparent raster conversion | Host label plus permission guidance |
 
 ### Design and verification rules
 

@@ -1747,4 +1747,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** The selected source SVGs are stored under `assets/tabler/` with a per-action mapping and are embedded for later testing; no runtime behavior was changed yet.
 - **Applicability:** General plugin icon selection; licensing/version details should be rechecked when assets are replaced.
 - **Reusable recommendation:** Prefer a small, named, documented icon subset over an undifferentiated icon bundle. Keep source SVGs separate from runtime derivatives and verify the host's SVG/raster composition path on hardware before making them dynamic.
+
+## 209. Logi SVG image loading can flatten transparent outlines (2026-09-19)
+
+- **Environment:** macOS Logi Actions plugin, `PluginResources.ReadImage()` loading Tabler SVG resources through `GetCommandImage()`.
+- **Observation:** SVGs declaring `fill="none"` and `stroke="currentColor"` rendered on the Loupedeck with a white filled background.
+- **Evidence:** The source SVG attributes were inspected directly; the white fill appeared only after runtime host loading.
+- **Applicability:** Host/runtime-specific to the tested macOS image path; do not generalize to browser or design-tool SVG rendering.
+- **Reusable recommendation:** Do not ship transparent SVGs directly through this runtime path without physical verification. Preserve SVG masters, convert to transparent PNG derivatives with a verified renderer, or use native `BitmapBuilder` composition.
 # Plugin development findings — curated engineering knowledge
