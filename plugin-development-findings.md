@@ -1755,4 +1755,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** The source SVG attributes were inspected directly; the white fill appeared only after runtime host loading.
 - **Applicability:** Host/runtime-specific to the tested macOS image path; do not generalize to browser or design-tool SVG rendering.
 - **Reusable recommendation:** Do not ship transparent SVGs directly through this runtime path without physical verification. Preserve SVG masters, convert to transparent PNG derivatives with a verified renderer, or use native `BitmapBuilder` composition.
+
+## 210. Action picker symbols and Icon Library assets are separate package surfaces (2026-09-19)
+
+- **Environment:** macOS Loupedeck editor and Logi Actions package layout.
+- **Observation:** `actionsymbols/` supplies the small symbol beside an action name, while `actionicons/` supplies reusable artwork surfaced by the Icon Library/action icon editor. Adding only the former does not create an Icon Library folder.
+- **Evidence:** The editor showed no CodexDeck icon collection after `actionsymbols` was added; the package now contains full-class-named filled-path SVGs in both folders.
+- **Applicability:** General Logi Actions plugin packaging.
+- **Reusable recommendation:** Add both package surfaces when a plugin needs picker identification and reusable user-selectable artwork. Verify the exact class-name convention and refresh/restart the host before judging discovery.
 # Plugin development findings — curated engineering knowledge

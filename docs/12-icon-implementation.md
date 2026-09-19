@@ -40,7 +40,8 @@ This section is the visual-design reference for future UX passes. It distinguish
 | Surface | How it is supplied | Best use | Current status |
 | --- | --- | --- | --- |
 | Package icon | Required packaged raster (`Icon256x256.png`) | Plugin identity in the host | In use; source artwork may be SVG, but the package uses a raster derivative |
-| Action-picker icon | SVG in the packaged `actionsymbols/` folder, named for the action class | Identifying an action while configuring a button | Now applied for Focus, Double-Press Interrupt, and Permissions using filled-path outline SVGs |
+| Action-picker symbol | SVG in the packaged `actionsymbols/` folder, named for the action class | Small symbol beside an action name in the picker | Applied for Focus, Double-Press Interrupt, and Permissions using filled-path outline SVGs |
+| Icon Library/action icon | SVG in the packaged `actionicons/` folder, named for the action class | Reusable artwork shown in the host Icon Library and action icon editor | Applied for the current core, workflow, interrupt, connection, and permissions actions |
 | Static action image | Embedded PNG returned by `PluginResources.ReadImage(...)` | A stable icon or a small finite set of known frames | Supported; `interrupt-attention.png` is in use |
 | Dynamic action image | `GetCommandImage(...)`, invalidated with `ActionImageChanged()` | State-dependent feedback | Supported and physically verified |
 | Host text label | `GetCommandDisplayName(...)` | Action name, state, result, and instructions | Required semantic layer; do not replace it with color or artwork |
