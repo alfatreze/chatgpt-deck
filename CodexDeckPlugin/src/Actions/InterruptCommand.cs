@@ -65,4 +65,7 @@ public sealed class InterruptDoubleCommand : PluginDynamicCommand
 
     protected override string GetCommandDisplayName(string actionParameter, PluginImageSize imageSize) =>
         ActionViewStateMapper.Map("Interrupt Codex (Double Press)", _status).Label + Environment.NewLine + ActionViewStateMapper.Map("Interrupt Codex (Double Press)", _status).Feedback;
+
+    protected override BitmapImage GetCommandImage(string actionParameter, PluginImageSize imageSize) =>
+        PluginResources.ReadImage("player-stop.svg");
 }

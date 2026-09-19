@@ -14,6 +14,9 @@ namespace Loupedeck.CodexDeckPlugin
             var receipt = _adapter.DispatchAsync(new ActionIntent(ProtocolConstants.ActionIntentType, ProtocolConstants.CurrentVersion, Guid.NewGuid(), "focus_codex"), CancellationToken.None).GetAwaiter().GetResult();
             PluginLog.Info($"Focus Codex receipt: {receipt.Status}");
         }
+
+        protected override BitmapImage GetCommandImage(string actionParameter, PluginImageSize imageSize) =>
+            PluginResources.ReadImage("target.svg");
     }
 
     public sealed class NewTaskCommand : PluginDynamicCommand

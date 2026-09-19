@@ -33,5 +33,8 @@ namespace Loupedeck.CodexDeckPlugin
             var view = PermissionViewMapper.Map(_state);
             return view.Label + Environment.NewLine + view.Feedback;
         }
+
+        protected override BitmapImage GetCommandImage(string actionParameter, PluginImageSize imageSize) =>
+            PluginResources.ReadImage("shield-check.svg");
     }
 }
