@@ -35,6 +35,22 @@ An initial reload did not expose a documented `ActionEditorCommand` prototype. A
 
 **Revisit when:** a host/plugin-service update or official sample demonstrates the required registration/package convention.
 
+## ADR-016 — Treat packaged action icons and Icon Library indexing as separate surfaces
+
+**Status:** Accepted (2026-09-19)
+
+The package may provide `actionicons/` defaults and `actionsymbols/` picker symbols without creating a CodexDeck collection in the host-managed Icon Library. Release acceptance therefore requires correct packaged defaults/reset behavior and physical rendering; Icon Library discoverability is a separate, host-dependent enhancement and must not block the default icon path.
+
+**Revisit when:** the host exposes a documented custom-library registration/indexing mechanism and it is reproduced after a clean install.
+
+## ADR-017 — Require three independent package-release gates
+
+**Status:** Accepted (2026-09-19)
+
+An archive can be syntactically accepted by the installer and still fail during plugin-service load. Packaging is complete only when (1) the installer accepts the archive, (2) the installed package remains on disk, and (3) a fresh plugin-service log proves the packaged assembly loaded and registers actions. The deterministic USTAR packer is retained, but publication is deferred until all three gates pass.
+
+**Revisit when:** a signed/distributed package path replaces local direct installation.
+
 ## ADR-014 — Provide explicit two-stage interrupt handling on verified hosts
 
 **Status:** Proposed
