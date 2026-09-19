@@ -13,4 +13,4 @@ These outline SVGs are temporary visual defaults for the first working plugin pa
 | `plug-connected.svg` | Companion Status |
 | `shield-check.svg` | Permissions & Connection |
 
-The `outline/` files are filled-path outline masters and are now used as action-picker symbols for three actions under `CodexDeckPlugin/src/package/actionsymbols/`. The `line/` files retain the original stroke-based alternatives. Neither set is substituted into dynamic status frames. The current reliable runtime path remains native `BitmapBuilder` status shells, while the host-rendered label supplies the action and state text.
+The root SVG files are the restored stroke-based Tabler sources and are now used as action-picker symbols/default action icons. Physical testing confirmed they render correctly at both stroke widths 1 and 2. They are not substituted into dynamic status frames. The current reliable runtime path remains native `BitmapBuilder` status shells, while the host-rendered label supplies the action and state text.

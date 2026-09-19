@@ -1748,13 +1748,13 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Applicability:** General plugin icon selection; licensing/version details should be rechecked when assets are replaced.
 - **Reusable recommendation:** Prefer a small, named, documented icon subset over an undifferentiated icon bundle. Keep source SVGs separate from runtime derivatives and verify the host's SVG/raster composition path on hardware before making them dynamic.
 
-## 209. Logi SVG image loading can flatten transparent outlines (2026-09-19)
+## 209. Dynamic SVG image loading can flatten transparent outlines (2026-09-19)
 
 - **Environment:** macOS Logi Actions plugin, `PluginResources.ReadImage()` loading Tabler SVG resources through `GetCommandImage()`.
-- **Observation:** SVGs declaring `fill="none"` and `stroke="currentColor"` rendered on the Loupedeck with a white filled background.
-- **Evidence:** The source SVG attributes were inspected directly; the white fill appeared only after runtime host loading.
-- **Applicability:** Host/runtime-specific to the tested macOS image path; do not generalize to browser or design-tool SVG rendering.
-- **Reusable recommendation:** Do not ship transparent SVGs directly through this runtime path without physical verification. Preserve SVG masters, convert to transparent PNG derivatives with a verified renderer, or use native `BitmapBuilder` composition.
+- **Observation:** SVGs declaring `fill="none"` and `stroke="currentColor"` rendered with a white filled background when loaded through the tested dynamic `GetCommandImage()` path.
+- **Evidence:** The same stroke-based Tabler SVGs render correctly as packaged action-picker/default icons, including after changing stroke width from 2 to 1.
+- **Applicability:** Dynamic runtime image path on the tested macOS host; it does not apply to packaged `actionsymbols/` or `actionicons/` rendering.
+- **Reusable recommendation:** Verify SVGs separately in each package/runtime surface. Do not infer that a dynamic-image transparency issue means line SVGs are invalid for action symbols or default action icons.
 
 ## 210. Action picker symbols and Icon Library assets are separate package surfaces (2026-09-19)
 
