@@ -1771,4 +1771,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Physical/editor screenshot and user reset test; build output contains the expected `actionicons` files.
 - **Applicability:** Host UI discovery behavior; default action icon application is proven, but collection indexing/caching remains host-specific and unverified.
 - **Reusable recommendation:** Test these outcomes separately: (1) action picker symbol, (2) default icon after add/reset, and (3) browsable Icon Library collection. Do not infer failure of `actionicons` from a missing library folder when reset/add behavior proves the asset is applied.
+
+## 212. Plugin actionicons may not create a browsable Icon Library collection (2026-09-19)
+
+- **Environment:** macOS Loupedeck app with a development-linked Codex Deck plugin and installed Logi plugins containing `actionicons/` directories.
+- **Observation:** Codex Deck action icons are recognized and restored on reset, but no separate CodexDeck collection appears in the visible Icon Library after plugin reload/restart attempts.
+- **Evidence:** Focus reset restored the packaged target icon; build output contains `actionicons/`; installed plugins also store action icons under that folder. The host’s visible library is populated by named Logi/user collections.
+- **Applicability:** Host UI indexing/discovery behavior; default action icon recognition is proven, library collection indexing remains unverified and may not be exposed to development-linked plugins.
+- **Reusable recommendation:** Treat `actionicons` as the default/reset artwork contract. Do not promise a browsable library collection unless it is verified with a packaged installation and the target host version; avoid destructive cache cleanup while investigating.
 # Plugin development findings — curated engineering knowledge
