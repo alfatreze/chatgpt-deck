@@ -1739,4 +1739,12 @@ Keep Codex-specific product decisions, feature priorities, and protocol choices 
 - **Evidence:** Codex Deck now documents and maps each surface separately; native full fills, rails, and rounded frames render on hardware, while externally sourced runtime PNG frames previously invoked the callback without visibly rendering.
 - **Applicability:** General plugin visual design and UX planning; the rendering reliability observation is host/runtime-specific to the tested macOS setup.
 - **Reusable recommendation:** Treat the host label as the semantic layer, use native primitives as the baseline for dynamic status shells, and introduce raster/SVG artwork as a separately verified composition step. Document the chosen insertion method per action so future visual redesigns do not accidentally replace a reliable runtime path or hide dynamic feedback with a static profile override.
+
+## 208. Tabler is a suitable provisional outline source (2026-09-19)
+
+- **Environment:** Codex Deck visual asset pass; Tabler Icons 3.46.0 checked on 2026-09-19.
+- **Observation:** Tabler provides a large MIT-licensed outline set on a consistent 24×24 grid with customizable stroke and color, making it suitable for temporary action glyphs before a product-specific visual pass.
+- **Evidence:** The selected source SVGs are stored under `assets/tabler/` with a per-action mapping and are embedded for later testing; no runtime behavior was changed yet.
+- **Applicability:** General plugin icon selection; licensing/version details should be rechecked when assets are replaced.
+- **Reusable recommendation:** Prefer a small, named, documented icon subset over an undifferentiated icon bundle. Keep source SVGs separate from runtime derivatives and verify the host's SVG/raster composition path on hardware before making them dynamic.
 # Plugin development findings — curated engineering knowledge

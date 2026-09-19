@@ -60,6 +60,8 @@ This section is the visual-design reference for future UX passes. It distinguish
 
 Use transparent RGBA PNG or SVG masters for artwork. Keep a 256×256 master for review and generate any smaller runtime derivative explicitly. The SDK documentation references 80×80 button PNGs; PNG compression is lossless and is not a separate rendering mode. Avoid assuming that a valid file will render dynamically: the current host failed to visibly display externally sourced runtime frames while invoking the callback, whereas native `BitmapBuilder` fills rendered correctly.
 
+The temporary Tabler set in `assets/tabler/` uses `external-link`, `target`, `plus`, `player-stop`, `bolt`, `activity`, `plug-connected`, and `shield-check` for the obvious Codex Deck actions. These are provisional source assets: they are embedded for later visual testing, but do not replace the verified native status shells until a physical composition test succeeds.
+
 ### Action-to-method map
 
 | Action/control | Dynamic state image method | Composition | Semantic/status text |
